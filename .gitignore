@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+dist/
+out/
+next/
+*.db
+reset.json
+challengeData.json
+notepad.txt

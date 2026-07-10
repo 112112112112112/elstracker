@@ -2,6 +2,12 @@
 const nextConfig = {
   /* config options here */
   reactStrictMode: true,
+  output: 'export',
+  assetPrefix: './',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  }
 };
 
 export default nextConfig;
