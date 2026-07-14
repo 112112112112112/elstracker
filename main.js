@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron/main');
-const autoUpdater = require('electron-updater');
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const fs = require('fs');
 const db = require('./database.js');
@@ -484,7 +484,9 @@ app.whenReady().then(() => {
     }
   })
 
-  autoUpdater.checkForUpdatesAndNotify();
+  if (app.isPackaged) {
+    autoUpdater.checkForUpdatesAndNotify();
+  }
 })
 
 app.on('window-all-closed', () => {
