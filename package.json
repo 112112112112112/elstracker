@@ -1,6 +1,6 @@
 {
   "name": "elstracker",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "main": "main.js",
   "private": true,
   "build": {
@@ -19,6 +19,10 @@
       "node_modules/**/*",
       "public/**/*"
     ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    },
     "win": {
       "target": "nsis"
     },
@@ -38,6 +42,7 @@
     "better-sqlite3": "^12.11.1",
     "bootstrap": "^5.3.8",
     "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.8.9",
     "express": "^5.2.1",
     "next": "16.2.9",
     "react": "19.2.4",

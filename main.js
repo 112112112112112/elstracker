@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron/main')
+const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron/main');
+const autoUpdater = require('electron-updater');
 const path = require('path');
-const fs = require('fs')
+const fs = require('fs');
 const db = require('./database.js');
 const crypto = require('crypto');
 let server = null;
@@ -188,6 +189,14 @@ const createWindow = () => {
     win.webContents.executeJavaScript('console.log("window.db:", window.db)');
   });
 }
+
+autoUpdater.on('update-available', () => {
+  console.log('An update is available. Downloading...');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  console.log('An update has been downloaded. Restarting...');
+});
 
 // * Database stuff -------------------------------------------------------------------*
 
@@ -474,6 +483,8 @@ app.whenReady().then(() => {
       createWindow()
     }
   })
+
+  autoUpdater.checkForUpdatesAndNotify();
 })
 
 app.on('window-all-closed', () => {
