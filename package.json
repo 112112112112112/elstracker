@@ -1,6 +1,6 @@
 {
   "name": "elstracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "main.js",
   "private": true,
   "build": {
@@ -36,7 +36,8 @@
     "electron": "electron .",
     "app": "concurrently \"npm run dev\" \"npm run electron\"",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "watch": "browser-sync start --proxy localhost:3000 --files 'pages/**/*.scss'"
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",
@@ -60,11 +61,13 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.11.2",
     "@electron-forge/plugin-fuses": "^7.11.2",
     "@electron/fuses": "^1.8.0",
+    "browser-sync": "^3.0.4",
     "concurrently": "^9.2.3",
     "electron": "^42.5.0",
     "electron-rebuild": "^3.2.9",
     "electron-reload": "^2.0.0-alpha.1",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9"
+    "eslint-config-next": "16.2.9",
+    "nodemon": "^3.1.14"
   }
 }

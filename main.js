@@ -166,7 +166,9 @@ const createWindow = () => {
     }, 2000);
     require('electron-reload')(__dirname, {
       electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
-      ignored: /node_modules|\.git|elstracker.db|\.next|out|dist/
+      ignored: /node_modules|\.git|elstracker.db|\.next|out|dist/,
+      watch: ['pages', 'components', 'styles'],
+      hardResetMethod: 'exit'
     })
   } else {
     startServer();

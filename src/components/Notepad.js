@@ -19,6 +19,7 @@ export default function Notepad() {
 
     return (
         <Form.Control
+            id='notepad'
             as="textarea"
             rows={10}
             value={notes}

@@ -1,10 +1,11 @@
-import { Button, Dropdown, Form, Table } from "react-bootstrap";
+import { Button, Dropdown, Form } from "react-bootstrap";
 
 export default function AddCharacterForm({
     newCharName, setNewCharName, newCharClass, setNewCharClass, newCharColor, setNewCharColor, classes, handleAddCharacter, error, setError
 }) {
+
     return (
-        <Table responsive striped bordered hover className='text-center'>
+        <table className='text-center box'>
             <thead>
                 <tr>
                     <th>Class</th>
@@ -37,11 +38,31 @@ export default function AddCharacterForm({
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)'}}>
                                         {classes.map(img => {
                                             const className = img.replace(/^\d+[-_]/, '')
+                                            const defaultColors = [
+                                            'red',
+                                            'violet',
+                                            'lightgreen',
+                                            'slategray',
+                                            'lightpink',
+                                            'cyan',
+                                            'orange',
+                                            'red',
+                                            'mediumpurple',
+                                            'blue',
+                                            'yellow',
+                                            'lightseagreen',
+                                            'magenta',
+                                            'cornflowerblue',
+                                            'seagreen'
+                                        ]
                                             return (
                                                 <Dropdown.Item
                                                 key={img}
                                                 onClick={() => {
                                                     setNewCharClass(img);
+                                                    const index = classes.indexOf(img);
+                                                    const groupIndex = Math.floor(index / 4) % defaultColors.length;
+                                                    setNewCharColor(defaultColors[groupIndex])
                                                 }}
                                                 >
                                                     <img src={`/img/classes/${img}.png`} alt={className} style={{ width: '63px', height: '63px', objectFit: 'contain' }} />
@@ -73,7 +94,6 @@ export default function AddCharacterForm({
                     <td className='text-center align-middle'>
                         <div className='d-flex justify-content-center'>
                             <Form.Control
-                                autoFocus
                                 type="color"
                                 value={newCharColor}
                                 onChange={(e) => setNewCharColor(e.target.value)}
@@ -81,15 +101,15 @@ export default function AddCharacterForm({
                         </div>
                     </td>
                     <td className='text-center align-middle'>
-                        <Button
-                            variant='primary'
+                        <button
+                        className="button-confirm"
                             onClick={handleAddCharacter}
                         >
                             Add Character
-                        </Button>
+                        </button>
                     </td>
                 </tr>
             </tbody>
-        </Table>
+        </table>
     );
 }

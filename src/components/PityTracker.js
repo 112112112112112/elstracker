@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 export default function PityTracker({ characters, tasks }) {
     const serpTask = tasks.find(t => t.title === 'Serpentium');
@@ -65,10 +65,10 @@ export default function PityTracker({ characters, tasks }) {
     return (
         <>
             <h2>Pity Tracker</h2>
-            <Table responsive striped bordered className='text-center'>
+            <table className='text-center box'>
                 <thead>
                     <tr>
-                        <th>Character</th>
+                        <th colSpan={2}>Character</th>
                         <th>Serpentium Actions</th>
                         <th>Serpentium %</th>
                         <th>Doom Actions</th>
@@ -84,12 +84,15 @@ export default function PityTracker({ characters, tasks }) {
                             <tr key={c.id}>
                                 <td>
                                     <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                                </td>
+                                <td>
                                     {c.name}
                                 </td>
                                 <td>
                                     <div className="d-flex align-items-center">
                                         <Button
                                             size="sm"
+                                            className="mx-2"
                                             variant="outline-secondary"
                                             onClick={() => removeRun(c.id, serpTask?.id)}
                                         >
@@ -98,6 +101,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <Button
                                             size="sm"
                                             variant="outline-secondary"
+                                            className="mx-2"
                                             onClick={() => addRun(c.id, serpTask?.id)}
                                         >
                                         ➕
@@ -106,6 +110,7 @@ export default function PityTracker({ characters, tasks }) {
                                             autoFocus
                                             type="number"
                                             size="sm"
+                                            className="mx-2"
                                             defaultValue={serp.runs}
                                             onKeyDown={async (e) => {
                                                 if (e.key === 'Enter') {
@@ -156,6 +161,7 @@ export default function PityTracker({ characters, tasks }) {
                                     <div className="d-flex align-items-center">
                                         <Button
                                             size="sm"
+                                            className="mx-2"
                                             variant="outline-secondary"
                                             onClick={() => removeRun(c.id, doomTask?.id)}
                                         >
@@ -163,6 +169,7 @@ export default function PityTracker({ characters, tasks }) {
                                         </Button>
                                         <Button
                                             size="sm"
+                                            className="mx-2"
                                             variant="outline-secondary"
                                             onClick={() => addRun(c.id, doomTask?.id)}
                                         >
@@ -172,6 +179,7 @@ export default function PityTracker({ characters, tasks }) {
                                             autoFocus
                                             type="number"
                                             size="sm"
+                                            className="mx-2"
                                             defaultValue={doom.runs}
                                             onKeyDown={async (e) => {
                                                 if (e.key === 'Enter') {
@@ -186,34 +194,12 @@ export default function PityTracker({ characters, tasks }) {
                                 </td>
                                 <td style={{ width: '16rem' }}>
                                     <div className="d-flex align-items-center gap-2">
-                                        <div style={{ 
-                                            backgroundColor: '#2d2d2d', 
-                                            borderRadius: '12px', 
-                                            height: '24px',
-                                            position: 'relative',
-                                            overflow: 'hidden',
-                                            flex: 1
-                                        }}>
-                                            <div style={{
+                                        <div className="pity-wrapper">
+                                            <div className="pity-bar" style={{
                                                 width: `${doom.percent}%`,
                                                 backgroundColor: doom.percent === 100 ? '#4fb667' : '#6e56f3',
-                                                height: '100%',
-                                                borderRadius: '6px',
-                                                transition: 'width 0.3s ease'
                                             }} />
-                                            <span style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                height: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                                textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
-
-                                            }}>
+                                            <span className="pity-text">
                                                 {Math.floor(doom.percent)}%
                                             </span>
                                         </div>
@@ -223,7 +209,7 @@ export default function PityTracker({ characters, tasks }) {
                         )
                     })}
                 </tbody>
-            </Table>
+            </table>
         </>
     )
 }

@@ -47,7 +47,7 @@ db.exec(`
 
 const accountExists = db.prepare('SELECT COUNT(*) as count FROM characters WHERE id = 0').get();
 if (accountExists.count === 0) {
-    db.prepare('INSERT INTO characters (id, name, class, color) VALUES (?, ?, ?, ?)').run(0, 'Account', 'None', '#7a7a7a');
+    db.prepare('INSERT INTO characters (id, name, class) VALUES (?, ?, ?)').run(0, 'Account', 'None');
 }
 
 

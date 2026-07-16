@@ -1,4 +1,4 @@
-import { Col, Row, Table } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 export default function AccountTracker({ tasks, checklist, toggleTask }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
@@ -17,10 +17,10 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
     });
 
     return (
-        <Row>
+        <Row className='my-5'>
             {enabledDailies.length > 0 && (
                 <Col>
-                    <Table responsive striped className='text-center'>
+                    <table className='text-center box'>
                         <thead>
                             <tr>
                                 <th>Dailies</th>
@@ -43,12 +43,12 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
                                 );
                             })}
                         </tbody>
-                    </Table>
+                    </table>
                 </Col>
             )}
             {enabledWeeklies.length > 0 && (
             <Col>
-                <Table responsive striped className='text-center'>
+                <table className='text-center box'>
                     <thead>
                         <tr>
                             <th>Weeklies</th>
@@ -71,7 +71,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
                             );
                         })}
                     </tbody>
-                </Table>
+                </table>
             </Col>
             )}
         </Row>

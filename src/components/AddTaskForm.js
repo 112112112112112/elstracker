@@ -1,13 +1,13 @@
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 export default function AddTaskForm({
     newIcon, setNewIcon, newTitle, setNewTitle, newReset, setNewReset, newBound, setNewBound, handleAddTask
 }) {
     return (
-        <Table responsive striped bordered hover className='text-center'>
+        <table className='text-center box'>
             <thead>
                 <tr>
-                    <th>Icon</th>
+                    <th colSpan={2}>Icon</th>
                     <th>Title</th>
                     <th>Reset</th>
                     <th>Bound</th>
@@ -17,29 +17,28 @@ export default function AddTaskForm({
             <tbody>
                 <tr>
                     <td className='text-center align-middle'>
-                        <div className='d-flex flex-column align-items-center'>
-                            <Form.Control
-                                autoFocus
-                                type="text"
-                                placeholder={'Icon filename'}
-                                value={newIcon}
-                                onChange={(e) => setNewIcon(e.target.value)}
-                                style={{ width: '24rem' }}
-                            />
-                            <Button
-                                variant="outline-primary"
-                                size="sm"
-                                onClick={async () => {
-                                    const filePath = await window.db.selectIcon();
-                                    if (filePath) {
-                                        const file = filePath.split('\\').pop().split('/').pop();
-                                        setNewIcon(file);
-                                    }
-                                }}
-                            >
-                                Select file
-                            </Button>
-                        </div>
+                        <Form.Control
+                            autoFocus
+                            type="text"
+                            placeholder={'Icon filename'}
+                            value={newIcon}
+                            onChange={(e) => setNewIcon(e.target.value)}
+                        />
+                    </td>
+                    <td className='text-center align-middle'>
+                        <button
+                            className="button-confirm"
+                            size="sm"
+                            onClick={async () => {
+                                const filePath = await window.db.selectIcon();
+                                if (filePath) {
+                                    const file = filePath.split('\\').pop().split('/').pop();
+                                    setNewIcon(file);
+                                }
+                            }}
+                        >
+                            Select file
+                        </button>
                     </td>
                     <td className='text-center align-middle'>
                         <div className='d-flex flex-column align-items-center'>
@@ -79,15 +78,15 @@ export default function AddTaskForm({
                         </div>
                     </td>
                     <td className='text-center align-middle'>
-                        <Button
-                            variant='primary'
+                        <button
+                            className="button-confirm"
                             onClick={handleAddTask}
                         >
                             Add Task
-                        </Button>
+                        </button>
                     </td>
                 </tr>
             </tbody>
-        </Table>
+        </table>
     );
 }

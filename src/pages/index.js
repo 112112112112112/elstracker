@@ -26,7 +26,7 @@ export default function IndexPage() {
     
     const [newCharName, setNewCharName] = useState('');
     const [newCharClass, setNewCharClass] = useState('');
-    const [newCharColor, setNewCharColor] = useState('#7a7a7a');
+    const [newCharColor, setNewCharColor] = useState('red');
 
     const [pityRefresh, setPityRefresh] = useState(0);
 
@@ -75,6 +75,7 @@ export default function IndexPage() {
 
         setError('')
 
+
         await window.db.addCharacter(newCharName, newCharClass, newCharColor);
 
         const newChar = await window.db.getCharacters();
@@ -85,7 +86,7 @@ export default function IndexPage() {
 
         setNewCharName('');
         setNewCharClass(classes[0] || '');
-        setNewCharColor('#7a7a7a');
+        setNewCharColor('red');
     };
 
     const handleEditCharacter = async(characterId, editCharName, editCharClass, editCharColor) => {
@@ -171,12 +172,12 @@ export default function IndexPage() {
     }
 
     return (
-        <div className='bg-dark min-vh-100 text-white'>
+        <div id='body' className='min-vh-100 text-white'>
             <Container className='mx-auto pt-4 pb-4'>
                 <h1 className='text-center'>ElsTracker</h1>
                 <Clock />
                 <h2>Notepad</h2>
-                <Row>
+                <Row className='my-5'>
                     <Col>
                         <Notepad />
                     </Col>
@@ -188,7 +189,7 @@ export default function IndexPage() {
                     toggleTask={toggleTask}
                 />
 
-                <Row>
+                <Row className='my-5'>
                     <Col>
                         <CharacterTracker 
                             characters={characters}
@@ -202,7 +203,7 @@ export default function IndexPage() {
                         />
                     </Col>
                 </Row>
-                <Row>
+                <Row className='my-5'>
                     <Col>
                         <ChallengeTracker
                             characters={characters}
@@ -212,7 +213,7 @@ export default function IndexPage() {
                         />
                     </Col>
                 </Row>
-                <Row>
+                <Row className='my-5'>
                     <Col>
                         <PityTracker
                             characters={characters}
@@ -221,7 +222,7 @@ export default function IndexPage() {
                         />
                     </Col>
                 </Row>
-                <Row>
+                <Row className='my-5'>
                     <Col>
                         <h2>Add a character</h2>
                         <AddCharacterForm 
@@ -239,7 +240,7 @@ export default function IndexPage() {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row className='my-5'>
                     <Col>
                         <h2>Create a task</h2>
                         <AddTaskForm

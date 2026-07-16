@@ -1,13 +1,254 @@
-.character-row {
+// * General ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#body {
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(138, 92, 246, 0.342) 0%, transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(88, 180, 255, 0.274) 0%, transparent 60%),
+        #0d0b1a;
+}
+
+#notepad {
+    backdrop-filter: blur(12.5px);
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border: solid 1px transparent;
+    border-radius: 20px;
+    background-image: linear-gradient(#241d35, #2F2957), linear-gradient(120deg, #6664f5 0%, #b579ec 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #e6c9ffb0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 0.5em;
+    padding: 1.5em
+}
+
+.scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+.box {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.32) 100%);
+    border: solid 1px rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.5rem;
+    color: #e6c9ffb0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+
+    &.box-character {
+        // td:nth-child(1) {
+        //     position: sticky;
+        //     left: 0;
+        //     background: rgba(13, 11, 26) !important;
+        //     z-index: 2;
+        //     min-width: 40px;
+        // }
+
+        // td:nth-child(2) {
+        //     position: sticky;
+        //     left: 50px;
+        //     background: rgba(13, 11, 26) !important;
+        //     z-index: 2;
+        //     min-width: 40px;
+        // }
+
+        // td:nth-child(3) {
+        //     position: sticky;
+        //     left: 100px;
+        //     background: rgba(13, 11, 26) !important;
+        //     z-index: 2;
+        //     min-width: 50px;
+        // }
+
+        // td:nth-child(4) {
+        //     position: sticky;
+        //     left: 160px;
+        //     background: rgba(13, 11, 26) !important;
+        //     z-index: 2;
+        //     min-width: 100px;
+        // }
+
+        // th {
+        //     z-index: 3 !important;
+        // }
+    }
+
+    th, td {
+        padding: 0.625rem 1rem;
+    }
+
+    th {
+        color: #987cff;
+        font-weight: 600;
+        font-size: 1.1em;
+        border-bottom: 2px solid rgba(139, 92, 246, 0.3) !important;
+    }
+
     td {
-        background-color: inherit !important;
-        &.cell-disabled {
-            background-color: lightgray !important;
+        color: #e6c9ff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    tr {
+        &:last-child td {
+            border-bottom: none !important;
+        }
+        &:hover td {
+            background: rgba(139, 92, 246, 0.08) !important;
         }
     }
 }
 
 
+// ? Form stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+input.form-control, select.form-select {
+    appearance: auto;
+    background: linear-gradient(93.71deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.23) 100%);
+    backdrop-filter: blur(40px);
+    border: solid 1px #b599ceb0;
+    border-radius: 20px;
+    color: #e6c9ffb0;
+
+    &::placeholder {
+        color: #bb95dbb0;
+    }
+
+    option {
+        color: #9b70bed8;
+    }
+}
+
+.button-confirm {
+    // backdrop-filter: blur(25px);
+    // background: linear-gradient(214.91deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.38) 100%);
+    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+    // border-radius: 20px;
+    padding: .375rem .75rem;
+    color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border: solid 1px transparent;
+    border-radius: 20px;
+    background-image: linear-gradient(#241d35, #2F2957),
+        linear-gradient(120deg, #6664f5 0%, #b579ec 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 
+            0 0 25px #7d5cf66e,
+            0 0 50px #4853ec65,
+            inset 0 0 25px #855cf60d;
+        // border-color: #8b5cf6;
+    }
+}
+
+// * Checklist ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.character-row {
+    border-radius: 20px;
+    outline-offset: -2px;
+    border-radius: 12px;
+
+    td {
+        background-color: inherit !important;
+        padding: .5rem;
+
+        &.cell-disabled {
+            background-color: slategrey !important;
+        }
+
+        &:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+
+        &:last-child {
+            border-radius: 0 20px 20px 0;
+        }
+    }
+}
+
+// * Characters ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Character Dropdown
+.dropdown-menu {
+    &.show {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(3px);
+        background-color: rgba(0, 0, 0, 0.38);
+        border: solid 1px transparent;
+        border-radius: 20px;
+        // background-image: linear-gradient(#0d071d, #09021b),
+        // linear-gradient(180deg, #EC64F5 0%, #4DF6C6 100%);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+    }
+}
+
+.dropdown-item {
+    background-color: transparent !important;
+    &:hover {
+        background-color: transparent !important;
+        img {
+            filter: drop-shadow(0 0 15px #ffffff) !important;
+        }
+    }
+
+    &:active,
+    &:focus {
+        background-color: transparent !important;
+    }
+
+}
+
+// * Challenge ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+// * Pity Tracker ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.pity-wrapper {
+    background-color: #2d2d2d;
+    border-radius: 12px;
+    height: 24px;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+
+    .pity-bar {
+        height: 100%;
+        border-radius: 6px;
+        transition: width 0.3s ease;
+    }
+
+    .pity-text {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px #000000cc;
+    }
+}
+
+// * Add character/task forms ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+// * Settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+// ? ----------------------------------------------------------------
 // $body: #3d3f4b;
 // // $light-purple: #bbaec4;
 // $light-purple: #b599ca;

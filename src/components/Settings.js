@@ -1,4 +1,4 @@
-import { Button, Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
@@ -14,7 +14,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                 <summary className="h4" style={{ cursor: 'pointer' }}>
                 Delete tasks
                 </summary>
-                    <Table responsive striped className='text-center'>
+                    <table className='text-center box'>
                         <thead>
                             <tr>
                                 <th>Task</th>
@@ -44,7 +44,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                 );
                             })}
                         </tbody>
-                    </Table>
+                    </table>
             </details>
 
             <details className="bg-secondary p-3 rounded mt-2">
@@ -52,7 +52,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                 Account settings
                 </summary>
                 <div className="bg-secondary p-3 rounded mt-2">
-                    <Table responsive striped className='text-center'>
+                    <table className='text-center box'>
                         <thead>
                             <tr>
                                 <th>Task</th>
@@ -82,7 +82,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                 );
                             })}
                         </tbody>
-                    </Table>
+                    </table>
                 </div>
             </details>
             <details className="bg-secondary p-3 rounded mt-2">
@@ -90,7 +90,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                 Character settings
                 </summary>
                 <div className="bg-secondary p-3 rounded mt-2 overflow-auto">
-                    <Table responsive striped className='text-center'>
+                    <table className='text-center box'>
                         <thead>
                             <tr>
                                 <th colSpan={2}>Character</th>
@@ -126,7 +126,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                 </tr>
                             ))}
                         </tbody>
-                    </Table>
+                    </table>
                 </div>
             </details>
         </details>
