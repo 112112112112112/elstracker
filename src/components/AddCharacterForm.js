@@ -39,21 +39,21 @@ export default function AddCharacterForm({
                                         {classes.map(img => {
                                             const className = img.replace(/^\d+[-_]/, '')
                                             const defaultColors = [
-                                            'red',
-                                            'violet',
-                                            'lightgreen',
-                                            'slategray',
-                                            'lightpink',
-                                            'cyan',
-                                            'orange',
-                                            'red',
-                                            'mediumpurple',
-                                            'blue',
-                                            'yellow',
-                                            'lightseagreen',
-                                            'magenta',
-                                            'cornflowerblue',
-                                            'seagreen'
+                                            '#DB2F2F',
+                                            '#9400D3',
+                                            '#41D941',
+                                            '#333333',
+                                            '#FF93AE',
+                                            '#99CCFF',
+                                            '#EF8D2D',
+                                            '#9B111E',
+                                            '#9F81F7',
+                                            '#1953B4',
+                                            '#E9C92C',
+                                            '#19D2A8',
+                                            '#DB4183',
+                                            '#414482',
+                                            '#3AA370'
                                         ]
                                             return (
                                                 <Dropdown.Item

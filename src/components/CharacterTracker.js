@@ -11,28 +11,10 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
         })
     })
 
-    const defaultColors = [
-        'red',
-        'violet',
-        'lightgreen',
-        'slategray',
-        'lightpink',
-        'cyan',
-        'orange',
-        'red',
-        'mediumpurple',
-        'blue',
-        'yellow',
-        'lightseagreen',
-        'magenta',
-        'cornflowerblue',
-        'seagreen'
-    ]
-
     const [editId, setEditId] = useState(null);
     const [editName, setEditName] = useState('');
     const [editClass, setEditClass] = useState('');
-    const [editColor, setEditColor] = useState('red');
+    const [editColor, setEditColor] = useState('');
     const [editError, setEditError] = useState('');
 
     const editChar = (c) => {

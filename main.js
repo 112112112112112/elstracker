@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const db = require('./database.js');
 const crypto = require('crypto');
+require('./tasks.js');
 let server = null;
 
 const ICONS_DIR = path.join(app.getPath('userData'), 'img', 'tasks');

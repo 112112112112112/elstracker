@@ -26,7 +26,7 @@ export default function IndexPage() {
     
     const [newCharName, setNewCharName] = useState('');
     const [newCharClass, setNewCharClass] = useState('');
-    const [newCharColor, setNewCharColor] = useState('red');
+    const [newCharColor, setNewCharColor] = useState('');
 
     const [pityRefresh, setPityRefresh] = useState(0);
 
@@ -40,10 +40,6 @@ export default function IndexPage() {
 
             const allClasses = await window.db.getClasses();
             setClasses(allClasses || []);
-
-            if (allClasses && allClasses.length > 0) {
-                setNewCharClass(allClasses[0])
-            }
 
             const allChecklist = await window.db.getChecklist();
             setChecklist(allChecklist);
@@ -72,9 +68,13 @@ export default function IndexPage() {
             setNewCharName('');
             return;
         }
-
+        
+        if (!newCharClass) {
+            alert('You need to select a class to create a character!');
+            return;
+        }
+        
         setError('')
-
 
         await window.db.addCharacter(newCharName, newCharClass, newCharColor);
 
@@ -85,8 +85,8 @@ export default function IndexPage() {
         setChecklist(newChecklist);
 
         setNewCharName('');
-        setNewCharClass(classes[0] || '');
-        setNewCharColor('red');
+        setNewCharClass('');
+        setNewCharColor('');
     };
 
     const handleEditCharacter = async(characterId, editCharName, editCharClass, editCharColor) => {
