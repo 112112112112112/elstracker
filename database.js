@@ -1,8 +1,25 @@
 const {app} = require('electron');
 const Database = require('better-sqlite3');
 const path = require('path');
-const dbPath = app.isPackaged ? path.join(app.getPath('userData'), 'elstracker.db') : path.join(__dirname, 'elstracker.db');
-const db = new Database(dbPath);
+// const dbPath = app.isPackaged ? path.join(app.getPath('userData'), 'elstracker.db') : path.join(__dirname, 'elstracker.db');
+
+const isElectron = process.versions?.electron ? true : false;
+
+function getDbPath() {
+    if (isElectron) {
+        try {
+            return path.join(app.getPath('userData'), 'elstracker.db');
+        } catch (e) {
+            return path.join(__dirname, 'elstracker.db');
+        }
+    }
+    return path.join(__dirname, 'elstracker.db');
+}
+
+const newDbPath = getDbPath();
+console.log(`Database path: ${newDbPath}`);
+
+const db = new Database(newDbPath);
 
 // ? run() INSERT/UPDATE/DELETE || get() SELECT -> row/undefined || all() SELECT -> array with all rows || prepare() VALUES(?).run(value)
 

@@ -1,16 +1,38 @@
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import ThemePicker from "./ThemePicker";
+import { useEffect, useState } from "react";
 
-export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask }) {
+export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask, viewMode, setViewMode, theme, setTheme }) {
+    const [webhookUrl, setWebhookUrl] = useState('');
+
+    useEffect(() => {
+        const saved = localStorage.getItem('webhookUrl');
+        if (saved) setWebhookUrl(saved);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('webhookUrl', webhookUrl);
+    }, [webhookUrl]);
+
     const accTasks = tasks.filter(t => t.bound === 'account');
     const charTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
 
     return (
         <details className="mt-4">
+            <Form.Group>
+                <Form.Label>Discord Webhook URL</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="https://discord.com/api/webhooks/..."
+                    value={webhookUrl}
+                    onChange={(e) => setWebhookUrl(e.target.value)}
+                />
+            </Form.Group>
             <summary className="h4" style={{ cursor: 'pointer' }}>
                 Enable, disable and delete tasks
             </summary>
 
-            <details className="bg-secondary p-3 rounded mt-2">
+            <details className="p-3 rounded mt-2">
                 <summary className="h4" style={{ cursor: 'pointer' }}>
                 Delete tasks
                 </summary>
@@ -47,11 +69,11 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                     </table>
             </details>
 
-            <details className="bg-secondary p-3 rounded mt-2">
+            <details className="p-3 rounded mt-2">
                 <summary className="h4" style={{ cursor: 'pointer' }}>
                 Account settings
                 </summary>
-                <div className="bg-secondary p-3 rounded mt-2">
+                <div className="p-3 rounded mt-2">
                     <table className='text-center box'>
                         <thead>
                             <tr>
@@ -85,11 +107,11 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                     </table>
                 </div>
             </details>
-            <details className="bg-secondary p-3 rounded mt-2">
+            <details className="p-3 rounded mt-2">
                 <summary className="h4" style={{ cursor: 'pointer' }}>
                 Character settings
                 </summary>
-                <div className="bg-secondary p-3 rounded mt-2 overflow-auto">
+                <div className="p-3 rounded mt-2 overflow-auto">
                     <table className='text-center box'>
                         <thead>
                             <tr>
@@ -127,6 +149,28 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                             ))}
                         </tbody>
                     </table>
+                </div>
+            </details>
+             <details className="p-3 rounded mt-2">
+                <summary className="h4" style={{ cursor: 'pointer' }}>
+                App Appearance
+                </summary>
+                <div className="p-3 rounded mt-2">
+                    <ThemePicker theme={theme} setTheme={setTheme} />
+                </div>
+                <div className="p-3 rounded mt-2">
+                    <h4>View Mode</h4>
+                    <Form.Select
+                        className="form-select"
+                        size="sm"
+                        value={viewMode}
+                        onChange={(e) => setViewMode(e.target.value)}
+                        style={{width: 'auto'}}
+                    >
+                        <option value="both">Show Icons & Titles</option>
+                        <option value="titles">Show Titles Only</option>
+                        <option value="icons">Show Icons Only</option>
+                    </Form.Select>
                 </div>
             </details>
         </details>

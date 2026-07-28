@@ -1,10 +1,13 @@
+require('dotenv').config();
+const BOT_TOKEN = process.env.BOT_TOKEN;
 const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron/main');
 const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const fs = require('fs');
 const db = require('./database.js');
 const crypto = require('crypto');
-require('./tasks.js');
+const tasks = require('./tasks.js');
+const axios = require('axios');
 let server = null;
 
 const ICONS_DIR = path.join(app.getPath('userData'), 'img', 'tasks');
@@ -63,6 +66,10 @@ function tasksReset() {
     }
   }
 
+  console.log('Current UTC:', now.toISOString());
+  console.log('Reset time:', dailyResetTime.toISOString());
+  console.log('Should reset?', now >= dailyResetTime);
+
   const day = now.getUTCDay();
   const lastWeeklyReset = resetData.lastWeeklyReset ? new Date(resetData.lastWeeklyReset) : null;
   const currentWednesday = new Date(now);
@@ -87,12 +94,11 @@ function tasksReset() {
   if (needsReset) {
     saveReset(resetData);
 
-    console.log('tasks reset test test test test ~~~~~~~~~~');
-
-    new Notification({
-      title: 'Tasks Reset',
-      body: 'Your Elsword tasks have been reset!'
-    }).show();
+    if (resetData.lastDailyReset || resetData.lastWeeklyReset) {
+      axios.post('http://localhost:3001/bot-send', {
+          message: '**Your tasks have been reset!**'
+      }).catch(() => {});
+    }
   }
 }
 
@@ -471,6 +477,17 @@ ipcMain.handle('delete-task', (event, taskId) => {
     db.prepare('DELETE FROM checklist WHERE task_id = ?').run(taskId);
     db.prepare('DELETE FROM tasks WHERE id = ?').run(taskId);
     return true;
+});
+
+// * Webhook ----------------------------------------------------------------------------------*
+
+ipcMain.handle('send-discord-msg', async (event, message) => {
+    try {
+        console.log('Daily completion notification (disabled):', message);
+        return { success: true };
+    } catch (error) {
+        return {success: false, error: error.message};
+    }
 });
 
 // * ----------------------------------------------------------------------------------*

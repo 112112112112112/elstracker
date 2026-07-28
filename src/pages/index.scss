@@ -1,22 +1,22 @@
+@import 'mixins';
+
 // * General ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #body {
-    background: 
-        radial-gradient(circle at 30% 40%, rgba(138, 92, 246, 0.342) 0%, transparent 60%),
-        radial-gradient(circle at 70% 60%, rgba(88, 180, 255, 0.274) 0%, transparent 60%),
-        #0d0b1a;
+    background: radial-gradient(circle at 30% 40%, #0a0a0a 0%, transparent 80%),
+        radial-gradient(circle at 70% 100%, var(--accent) 0%, transparent 60%),
+        #1a1a1a;
+    background-attachment: fixed;
 }
 
 #notepad {
+    background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
     backdrop-filter: blur(12.5px);
     border-radius: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border: solid 1px transparent;
+    border: solid 1px var(--accent);
     border-radius: 20px;
-    background-image: linear-gradient(#241d35, #2F2957), linear-gradient(120deg, #6664f5 0%, #b579ec 100%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    color: #e6c9ffb0;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -31,67 +31,29 @@
 }
 
 .box {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.32) 100%);
-    border: solid 1px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(320deg, #0a0a0a, #1a1a1a);
+    border: solid 1px var(--accent);
     border-radius: 20px;
     padding: 1.5rem;
-    color: #e6c9ffb0;
+    color: #ffffff;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 8px;
-
-    &.box-character {
-        // td:nth-child(1) {
-        //     position: sticky;
-        //     left: 0;
-        //     background: rgba(13, 11, 26) !important;
-        //     z-index: 2;
-        //     min-width: 40px;
-        // }
-
-        // td:nth-child(2) {
-        //     position: sticky;
-        //     left: 50px;
-        //     background: rgba(13, 11, 26) !important;
-        //     z-index: 2;
-        //     min-width: 40px;
-        // }
-
-        // td:nth-child(3) {
-        //     position: sticky;
-        //     left: 100px;
-        //     background: rgba(13, 11, 26) !important;
-        //     z-index: 2;
-        //     min-width: 50px;
-        // }
-
-        // td:nth-child(4) {
-        //     position: sticky;
-        //     left: 160px;
-        //     background: rgba(13, 11, 26) !important;
-        //     z-index: 2;
-        //     min-width: 100px;
-        // }
-
-        // th {
-        //     z-index: 3 !important;
-        // }
-    }
 
     th, td {
         padding: 0.625rem 1rem;
     }
 
     th {
-        color: #987cff;
+        color: var(--accent);
         font-weight: 600;
         font-size: 1.1em;
-        border-bottom: 2px solid rgba(139, 92, 246, 0.3) !important;
+        border-bottom: 2px solid var(----accent-soft) !important;
     }
 
     td {
-        color: #e6c9ff;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        color: #ffffff;
+        border-bottom: 2px solid var(--accent-soft) !important;
     }
 
     tr {
@@ -99,7 +61,7 @@
             border-bottom: none !important;
         }
         &:hover td {
-            background: rgba(139, 92, 246, 0.08) !important;
+            background-color: var(--accent-soft) !important;
         }
     }
 }
@@ -107,46 +69,97 @@
 
 // ? Form stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-input.form-control, select.form-select {
+input.form-control, select.form-select, button.form-dropdown {
     appearance: auto;
-    background: linear-gradient(93.71deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.23) 100%);
+    background: #202020;
     backdrop-filter: blur(40px);
-    border: solid 1px #b599ceb0;
+    border: solid 1px var(--accent);
     border-radius: 20px;
-    color: #e6c9ffb0;
+    color: #ffffff !important;
+    padding: .375rem .75rem;
 
     &::placeholder {
-        color: #bb95dbb0;
+        color: #ffffff !important;
+    }
+
+    &:focus {
+        background-color: #202020 !important;
     }
 
     option {
-        color: #9b70bed8;
+        color: #ffffff;
+        
     }
 }
 
-.button-confirm {
-    // backdrop-filter: blur(25px);
-    // background: linear-gradient(214.91deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.38) 100%);
-    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
-    // border-radius: 20px;
-    padding: .375rem .75rem;
-    color: white;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border: solid 1px transparent;
-    border-radius: 20px;
-    background-image: linear-gradient(#241d35, #2F2957),
-        linear-gradient(120deg, #6664f5 0%, #b579ec 100%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    transition: all 0.3s ease-in-out;
+@mixin btn-custom($bg, $color, $hover-bg, $hover-color, $glow) {
+    background: $bg !important;
+    color: $color !important;
+    border: 1px solid transparent;
+    transition: ease-in-out 0.3 ease;
 
     &:hover {
+        background: $hover-bg;
+        color: $hover-color;
         box-shadow: 
-            0 0 25px #7d5cf66e,
-            0 0 50px #4853ec65,
-            inset 0 0 25px #855cf60d;
-        // border-color: #8b5cf6;
+            0 0 1.25rem $glow,
+            inset 0 0 1.25rem $glow;
     }
+
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+@mixin btn-yeah {
+    padding: .375rem .75rem;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0px 0px 4px var(--glow);
+    border: solid 2px transparent;
+    border-radius: 20px;
+    // background: var(--accent);
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+        color: #ffffff;
+        background-color: var(--accent);
+        box-shadow: 
+            0 0 1.25rem var(--glow),
+            inset 0 0 1.25rem var(--glow);
+        border-color: var(--glow);
+
+    }
+
+    &:disabled {
+        border-color: var(--accent);
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+button.btn-outline-light {
+    // @include btn-custom(var(--theme-button), var(--theme-text), var(--theme-hover), var(--theme-secondary), var(--theme-glow));
+    @include btn-yeah();
+}
+
+// button.btn-link {
+//     border: none !important;
+//     text-decoration: none;
+//     transition: 0.3s ease-in-out;
+
+//     &:hover {
+//         background-color: var(--accent);
+//     }
+// }
+
+button.form-dropdown {
+    padding: .375rem .75rem;
+}
+
+.button-confirm {
+    @include btn-yeah();
+    background: var(--accent)
 }
 
 // * Checklist ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,6 +172,7 @@ input.form-control, select.form-select {
     td {
         background-color: inherit !important;
         padding: .5rem;
+        border-bottom: none !important;
 
         &.cell-disabled {
             background-color: slategrey !important;
@@ -172,22 +186,36 @@ input.form-control, select.form-select {
             border-radius: 0 20px 20px 0;
         }
     }
+
+    // TODO sticky when scrolling
+
+    input.form-control {
+        // background-color: #202020 !important;
+        border-color: var(--accent);
+        // color: #ffffff !important;
+
+        // &::placeholder {
+        //     color: #ffffff;
+        // }
+
+        &:focus, &:focus-visible {
+            // background-color: #202020 !important;
+            // color: var(--accent);
+        }
+    }
 }
 
 // * Characters ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// Character Dropdown
+//          ? Character Dropdown
 .dropdown-menu {
     &.show {
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(3px);
-        background-color: rgba(0, 0, 0, 0.38);
-        border: solid 1px transparent;
+        background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+        backdrop-filter: blur(12.5px);
         border-radius: 20px;
-        // background-image: linear-gradient(#0d071d, #09021b),
-        // linear-gradient(180deg, #EC64F5 0%, #4DF6C6 100%);
-        background-origin: border-box;
-        background-clip: padding-box, border-box;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        border: solid 1px var(--accent);
+        border-radius: 20px;
     }
 }
 
@@ -196,7 +224,7 @@ input.form-control, select.form-select {
     &:hover {
         background-color: transparent !important;
         img {
-            filter: drop-shadow(0 0 15px #ffffff) !important;
+            filter: drop-shadow(0 0 15px var(--glow)) !important;
         }
     }
 
@@ -214,7 +242,8 @@ input.form-control, select.form-select {
 // * Pity Tracker ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .pity-wrapper {
-    background-color: #2d2d2d;
+    background: linear-gradient(93.71deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.23) 100%);
+    backdrop-filter: blur(40px);
     border-radius: 12px;
     height: 24px;
     position: relative;
@@ -249,74 +278,3 @@ input.form-control, select.form-select {
 
 
 // ? ----------------------------------------------------------------
-// $body: #3d3f4b;
-// // $light-purple: #bbaec4;
-// $light-purple: #b599ca;
-// $nav-dark: #34313e;
-
-// body {
-//     background: $body;
-//     color: white;
-//     // overflow-y: hidden;
-//     // overflow-x: hidden;
-// }
-
-// .icon {
-//     width: 6rem;
-//     height: 6rem;
-// }
-
-// .nav {
-//     background: $nav-dark;
-//     &-link {
-//         color: white;
-//         text-decoration: underline transparent;
-//         &:hover, &:focus {
-//             color: $light-purple;
-//             text-decoration: underline $light-purple 2px;
-//             text-underline-offset: 0.5rem;
-//             transition: all 0.2s;
-//         }
-//     }
-// }
-
-// .dropdown {
-//     &-item {
-//         &:hover {
-//             background-color: transparent;
-//         }
-//     }
-//     &-menu {
-//         &.show {
-//             background: $nav-dark;
-//             a {
-//                 color: white;
-//                 text-align: center;
-//             }
-//         }
-//     }
-// }
-
-// .sidebar {
-//     background: $nav-dark;
-//     color: white;
-//     height: 100vh;
-//     ul {
-//         list-style: none;
-//     }
-//     &-icons, .folder-group {
-//         background: #00000025;
-//         border-radius: 1.25rem;
-//         display: flex;
-//         padding: 0.25rem 0.75rem;
-//         span {
-//             color: $light-purple;
-//         }
-//     }
-//     &-icons {
-//         justify-content: center;
-//     }
-//     .folder-group {
-//         justify-content: space-between;
-//     }
-// }

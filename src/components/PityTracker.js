@@ -81,7 +81,7 @@ export default function PityTracker({ characters, tasks }) {
                         const doom = getPity(c.id, doomTask);
 
                         return (
-                            <tr key={c.id}>
+                            <tr key={c.id} className='character-row' style={{ backgroundColor: `${c.color}33`, outline: `2px solid ${c.color}` }}>
                                 <td>
                                     <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
                                 </td>
@@ -93,14 +93,14 @@ export default function PityTracker({ characters, tasks }) {
                                         <Button
                                             size="sm"
                                             className="mx-2"
-                                            variant="outline-secondary"
+                                            variant="outline-light"
                                             onClick={() => removeRun(c.id, serpTask?.id)}
                                         >
                                         ➖
                                         </Button>
                                         <Button
                                             size="sm"
-                                            variant="outline-secondary"
+                                            variant="outline-light"
                                             className="mx-2"
                                             onClick={() => addRun(c.id, serpTask?.id)}
                                         >
@@ -111,6 +111,8 @@ export default function PityTracker({ characters, tasks }) {
                                             type="number"
                                             size="sm"
                                             className="mx-2"
+                                            style={{ width: '4rem' }}
+                                            max={100}
                                             defaultValue={serp.runs}
                                             onKeyDown={async (e) => {
                                                 if (e.key === 'Enter') {
@@ -125,33 +127,12 @@ export default function PityTracker({ characters, tasks }) {
                                 </td>
                                 <td style={{ width: '16rem' }}>
                                     <div className="d-flex align-items-center gap-2">
-                                        <div style={{ 
-                                            backgroundColor: '#2d2d2d', 
-                                            borderRadius: '12px', 
-                                            height: '24px',
-                                            position: 'relative',
-                                            overflow: 'hidden',
-                                            flex: 1
-                                        }}>
-                                            <div style={{
+                                        <div className="pity-wrapper">
+                                            <div className="pity-bar" style={{
                                                 width: `${serp.percent}%`,
                                                 backgroundColor: serp.percent === 100 ? '#4fb667' : '#98e650',
-                                                height: '100%',
-                                                borderRadius: '6px',
-                                                transition: 'width 0.3s ease'
                                             }} />
-                                            <span style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                height: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                                textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
-                                            }}>
+                                            <span className="pity-text">
                                                 {Math.floor(serp.percent)}%
                                             </span>
                                         </div>
@@ -162,7 +143,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <Button
                                             size="sm"
                                             className="mx-2"
-                                            variant="outline-secondary"
+                                            variant="outline-light"
                                             onClick={() => removeRun(c.id, doomTask?.id)}
                                         >
                                         ➖
@@ -170,7 +151,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <Button
                                             size="sm"
                                             className="mx-2"
-                                            variant="outline-secondary"
+                                            variant="outline-light"
                                             onClick={() => addRun(c.id, doomTask?.id)}
                                         >
                                         ➕
@@ -180,6 +161,8 @@ export default function PityTracker({ characters, tasks }) {
                                             type="number"
                                             size="sm"
                                             className="mx-2"
+                                            style={{ width: '4rem' }}
+                                            max={100}
                                             defaultValue={doom.runs}
                                             onKeyDown={async (e) => {
                                                 if (e.key === 'Enter') {

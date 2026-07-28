@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Dropdown, Form, Table } from "react-bootstrap";
 
-export default function CharacterTracker({ characters, tasks, checklist, toggleTask, handleDeleteCharacter, handleEditCharacter, classes, validateName }) {
+export default function CharacterTracker({ characters, tasks, checklist, toggleTask, handleDeleteCharacter, handleEditCharacter, classes, validateName, currentWeek, viewMode }) {
     const allTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
 
     const enabledTasks = allTasks.filter(task => {
@@ -40,33 +40,28 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
         setEditId(null);
     }
 
-    const [currentWeek, setCurrentWeek] = useState('');
-    
-    useEffect(() => {
-        async function load() {
-
-            const week = await window.db.getCurrentWeek();
-            setCurrentWeek(week);
-        }
-
-        load();
-    }, []);
-
     return (
+        <>
         <div className="scroll-wrapper">
             <table className='text-center box box-character'>
                 <thead>
                     <tr>
                         <th colSpan={2}>Action</th>
                         <th colSpan={2}>Character</th>
-                        {enabledTasks.map(t => 
+                        {enabledTasks.map(t => {
+                            let icon = t.icon ? `img/tasks/${t.icon}` : null;
+                            if (t.title === 'Challenge Mode' && currentWeek) {
+                                icon = currentWeek === 'Rosso' ? '/img/tasks/rosso.webp' : '/img/tasks/berthe.webp';
+                            }
+                            return (
                             <th key={t.id}>
-                                {t.icon && (
-                                    <img src={`/img/tasks/${t.icon}`} style={{ maxWidth: '80px', maxHeight: '80px'}} />
+                                {(viewMode === 'both' || viewMode === 'icons') && icon && (
+                                    <img src={icon} style={{ maxWidth: '80px', maxHeight: '80px'}} />
                                 )}
-                                {t.title}
-                            </th>
-                        )}
+                                {(viewMode === 'both' || viewMode === 'titles') && t.title}
+                                </th>
+                            )
+                        })}
                     </tr>
                 </thead>
                 <tbody>
@@ -78,19 +73,19 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                 {isEditing ? (
                                     <>
                                         <td>
-                                            <Button variant='outline-success' size='sm' onClick={() => saveEdit(c.id)}>💾</Button>
+                                            <Button variant='outline-light' size='sm' onClick={() => saveEdit(c.id)}>💾</Button>
                                         </td>
                                         <td>
-                                            <Button variant='outline-secondary' size='sm' onClick={cancelEdit}>✖️</Button>
+                                            <Button variant='outline-light' size='sm' onClick={cancelEdit}>✖️</Button>
                                         </td>
                                     </>
                                 ) : (
                                     <>
                                         <td>
-                                            <Button variant='outline-danger' size='sm' onClick={() => handleDeleteCharacter(c.id)}>🗑️</Button>
+                                            <Button variant='outline-light' size='sm' onClick={() => handleDeleteCharacter(c.id)}>🗑️</Button>
                                         </td>
                                         <td>
-                                            <Button variant='outline-warning' size='sm' onClick={() => editChar(c)}>✏️</Button>
+                                            <Button variant='outline-light' size='sm' onClick={() => editChar(c)}>✏️</Button>
                                         </td>
                                     </>
                                 )}
@@ -114,9 +109,9 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                         <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
                                     )}
                                 </td>
-                                <td>
                                     {isEditing ? (
-                                        <div className="d-flex flex-column align-items-center">
+                                        <>
+                                            <td>
                                             <Form.Control
                                                 autoFocus
                                                 type="text"
@@ -130,17 +125,22 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                                 }}
                                                 isInvalid={!!editError}
                                             />
-                                            <Form.Control
-                                                autoFocus
-                                                type="color"
-                                                value={editColor}
-                                                onChange={(e) => setEditColor(e.target.value)}
-                                            />
-                                        </div>
+                                            </td>
+                                            <td>
+                                                <Form.Control
+                                                    autoFocus
+                                                    type="color"
+                                                    value={editColor}
+                                                    onChange={(e) => setEditColor(e.target.value)}
+                                                />
+                                            </td>
+                                        </>
                                     ) : (
-                                        c.name
+                                        <td>
+                                            {c.name}
+                                        </td>
+                                        
                                     )}
-                                </td>
                                 {enabledTasks.map(task => {
                                     const row = checklist.find(cl => cl.character_id === c.id && cl.task_id === task.id) || {completed: 0};
                                     if (row.enabled === 0) {
@@ -165,5 +165,6 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                 </tbody>
             </table>
         </div>
+        </>
     );
 }

@@ -37,7 +37,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                         const isCleared = checklist.some(cl => cl.character_id === c.id && cl.task_id === challengeTask?.id && cl.completed === 1);
 
                         return (
-                            <tr key={c.id}>
+                            <tr key={c.id} className='character-row' style={{ backgroundColor: `${c.color}33`, outline: `2px solid ${c.color}` }}>
                                 <td>
                                     <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
                                 </td>
@@ -52,7 +52,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                             <Button
                                                 size="sm"
                                                 className="mx-2"
-                                                variant="outline-success"
+                                                variant="outline-light"
                                                 onClick={async () => {
                                                     await window.db.updateAura(c.id, currentWeek, 30);
                                                     const data = await window.db.getChallengeData();
@@ -70,7 +70,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                         <Button
                                             size="sm"
                                             className="mx-2"
-                                            variant="outline-warning"
+                                            variant="outline-light"
                                             disabled={aura < 90}
                                             onClick={async () => {
                                                 if (confirm('Are you sure you want to exchange 90 Aura for CM Suit?')) {
@@ -85,7 +85,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                         <Button
                                             size="sm"
                                             className="mx-2"
-                                            variant="outline-warning"
+                                            variant="outline-light"
                                             disabled = {aura < 240}
                                             onClick={async () => {
                                                 if (confirm('Are you sure you want to exchange 240 Aura for CM Force?')) {
@@ -100,7 +100,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                         <Button
                                             size="sm"
                                             className="mx-2"
-                                            variant="outline-danger"
+                                            variant="outline-light"
                                             onClick={async () => {
                                                 if (confirm('Are you sure you want to reset your Aura amount to 0?')) {
                                                     await window.db.resetAura(c.id, currentWeek);
@@ -115,7 +115,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                             <Button
                                                 size="sm"
                                                 className="mx-2"
-                                                variant="outline-info"
+                                                variant="outline-light"
                                                 disabled={data.resetTicketUsed >= 2}
                                                 onClick={async () => {
                                                     if (confirm('Are you sure you want to use a Reset Ticket?')) {

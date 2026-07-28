@@ -21,6 +21,7 @@ export default function AddCharacterForm({
                             <Dropdown.Toggle
                                 variant='outline-secondary'
                                 size='sm'
+                                className="form-dropdown"
                             >
                                 {newCharClass ? (
                                     <>

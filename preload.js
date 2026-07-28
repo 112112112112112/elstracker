@@ -51,4 +51,7 @@ contextBridge.exposeInMainWorld('db', {
 
     deleteTask: (taskId) =>
         ipcRenderer.invoke('delete-task', taskId),
+
+    sendDiscordMsg: (message) =>
+        ipcRenderer.invoke('send-discord-msg', message),
 })
