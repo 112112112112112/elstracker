@@ -47,7 +47,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                 <td>{aura}</td>
                                 <td>{data.resetTicketUsed}/2</td>
                                 <td>
-                                    <div className="button-box d-flex">
+                                    <div className="button-box d-flex justify-content-center">
                                         {!isCleared ? (
                                             <Button
                                                 size="sm"
@@ -65,7 +65,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                                 Clear (+30 Aura)
                                                 </Button>
                                         ) : (
-                                            <span className="text-muted">Cleared</span>
+                                            <></>
                                         )}
                                         <Button
                                             size="sm"
@@ -128,7 +128,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                                     }
                                                 }}
                                             >
-                                                Use Reset Ticket ({data.resetTicketUsed}/2)
+                                                Reset Ticket ({data.resetTicketUsed}/2)
                                             </Button>
                                         )}
 

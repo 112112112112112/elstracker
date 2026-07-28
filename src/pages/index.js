@@ -7,10 +7,8 @@ import AddTaskForm from '../components/AddTaskForm';
 import ChallengeTracker from '../components/ChallengeTracker';
 import CharacterTracker from '../components/CharacterTracker';
 import Clock from '../components/Clock';
-import Notepad from '../components/Notepad';
 import PityTracker from '../components/PityTracker';
 import Settings from '../components/Settings';
-import ThemePicker from '../components/ThemePicker';
 
 export default function IndexPage() {
     const [tasks, setTasks] = useState([]);
@@ -244,12 +242,6 @@ export default function IndexPage() {
             <Container className='mx-auto pt-4 pb-4'>
                 <h1 className='text-center'>ElsTracker</h1>
                 <Clock />
-                <h2>Notepad</h2>
-                <Row className='my-5'>
-                    <Col>
-                        <Notepad />
-                    </Col>
-                </Row>
                 <h2>📑 Checklist</h2>
                 <AccountTracker
                     tasks={tasks}

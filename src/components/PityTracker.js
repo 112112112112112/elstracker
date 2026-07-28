@@ -89,7 +89,7 @@ export default function PityTracker({ characters, tasks }) {
                                     {c.name}
                                 </td>
                                 <td>
-                                    <div className="d-flex align-items-center">
+                                    <div className="d-flex justify-content-center">
                                         <Button
                                             size="sm"
                                             className="mx-2"
@@ -139,7 +139,7 @@ export default function PityTracker({ characters, tasks }) {
                                     </div>
                                 </td>
                                 <td>
-                                    <div className="d-flex align-items-center">
+                                    <div className="d-flex justify-content-center">
                                         <Button
                                             size="sm"
                                             className="mx-2"

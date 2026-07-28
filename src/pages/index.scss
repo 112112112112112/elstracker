@@ -17,11 +17,16 @@
     border: solid 1px var(--accent);
     border-radius: 20px;
     color: #ffffff;
+        color: var(--glow);
+
     display: flex;
     flex-direction: column;
     gap: 1em;
-    margin: 0.5em;
-    padding: 1.5em
+    padding: 1.5em;
+    
+    &::placeholder {
+        color: var(--accent);
+    }
 }
 
 .scroll-wrapper {
@@ -48,7 +53,7 @@
         color: var(--accent);
         font-weight: 600;
         font-size: 1.1em;
-        border-bottom: 2px solid var(----accent-soft) !important;
+        border-bottom: 2px solid var(--accent-soft) !important;
     }
 
     td {
@@ -167,7 +172,6 @@ button.form-dropdown {
 .character-row {
     border-radius: 20px;
     outline-offset: -2px;
-    border-radius: 12px;
 
     td {
         background-color: inherit !important;

@@ -1,4 +1,5 @@
 import { Col, Row } from "react-bootstrap";
+import Notepad from "./Notepad";
 
 export default function AccountTracker({ tasks, checklist, toggleTask }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
@@ -18,8 +19,11 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
 
     return (
         <Row className='my-5'>
+            <Col>
+                <Notepad />
+            </Col>
             {enabledDailies.length > 0 && (
-                <Col>
+                <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem'}}>
                     <table className='text-center box'>
                         <thead>
                             <tr>
@@ -44,10 +48,10 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
                             })}
                         </tbody>
                     </table>
-                </Col>
-            )}
-            {enabledWeeklies.length > 0 && (
-            <Col>
+                {/* </Col> */}
+            {/* )} */}
+            {/* {enabledWeeklies.length > 0 && ( */}
+            {/* // <Col> */}
                 <table className='text-center box'>
                     <thead>
                         <tr>

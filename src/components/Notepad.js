@@ -23,6 +23,7 @@ export default function Notepad() {
             as="textarea"
             rows={10}
             value={notes}
+            style={{height: '100%'}}
             onChange={(e) => {
                 setNotes(e.target.value);
                 saveNotes(e.target.value);

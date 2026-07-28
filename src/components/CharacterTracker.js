@@ -17,6 +17,7 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
     const [editColor, setEditColor] = useState('');
     const [editError, setEditError] = useState('');
 
+
     const editChar = (c) => {
         setEditId(c.id);
         setEditName(c.name);
@@ -47,7 +48,7 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                 <thead>
                     <tr>
                         <th colSpan={2}>Action</th>
-                        <th colSpan={2}>Character</th>
+                        <th colSpan={3}>Character</th>
                         {enabledTasks.map(t => {
                             let icon = t.icon ? `img/tasks/${t.icon}` : null;
                             if (t.title === 'Challenge Mode' && currentWeek) {
@@ -123,6 +124,7 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                                     setEditName(e.target.value);
                                                     setEditError('');
                                                 }}
+                                                style={{ width: '12rem' }}
                                                 isInvalid={!!editError}
                                             />
                                             </td>
@@ -136,10 +138,14 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                             </td>
                                         </>
                                     ) : (
-                                        <td>
-                                            {c.name}
-                                        </td>
-                                        
+                                        <>
+                                            <td
+                                                colSpan={2}
+                                                style={{ width: '100%', textAlign: "center" }}
+                                            >
+                                                {c.name}
+                                            </td>
+                                        </>
                                     )}
                                 {enabledTasks.map(task => {
                                     const row = checklist.find(cl => cl.character_id === c.id && cl.task_id === task.id) || {completed: 0};
