@@ -10,11 +10,6 @@ const dbPath = path.join(appData, 'elstracker', 'elstracker.db');
 const db = require('better-sqlite3')(dbPath);
 app.use(express.json());
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const CLIENT_ID = process.env.CLIENT_ID;
-const CHANNEL_ID = process.env.CHANNEL_ID;
-const WEBHOOK_URL = process.env.WEBHOOK_URL;
-
 app.get('/dailies-status', (req, res) => {
     try {
         const charId = 0; // * account dailies
