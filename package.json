@@ -34,7 +34,8 @@
     "start": "electron-forge start",
     "lint": "eslint",
     "electron": "electron .",
-    "app": "concurrently \"npm run dev\" \"npm run electron\"",
+    "bot": "node bot.js",
+    "app": "concurrently \"npm run dev\" \"npm run electron\" \"npm run bot\"",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "watch": "browser-sync start --proxy localhost:3000 --files 'pages/**/*.scss'"
