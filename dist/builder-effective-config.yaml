@@ -17,7 +17,10 @@ files:
       - public/**/*
 publish:
   provider: github
+  owner: '112112112112112'
+  repo: elstracker
   releaseType: release
+  token: b4b61b47b9d665abbd891d18429b313468a8ab456da3a37d135114d77caa4e36 (sha256 hash)
 win:
   target: nsis
 npmRebuild: false

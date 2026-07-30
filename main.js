@@ -205,6 +205,11 @@ autoUpdater.on('update-available', () => {
 
 autoUpdater.on('update-downloaded', () => {
   console.log('An update has been downloaded. Restarting...');
+  autoUpdater.quitAndInstall();
+});
+
+autoUpdater.on('error', (error) => {
+  console.error('Error when updating: ', error);
 });
 
 // * Database stuff -------------------------------------------------------------------*
