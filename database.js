@@ -67,5 +67,12 @@ if (accountExists.count === 0) {
     db.prepare('INSERT INTO characters (id, name, class) VALUES (?, ?, ?)').run(0, 'Account', 'None');
 }
 
+try {
+    require('./tasks.js');
+    console.log('Tasks seeded!');
+} catch (error) {
+    console.error('Error seeding tasks :', error.message);
+
+}
 
 module.exports = db;

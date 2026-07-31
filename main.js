@@ -94,11 +94,11 @@ function tasksReset() {
   if (needsReset) {
     saveReset(resetData);
 
-    if (resetData.lastDailyReset || resetData.lastWeeklyReset) {
-      axios.post('http://localhost:3001/bot-send', {
-          message: '**Your tasks have been reset!**'
-      }).catch(() => {});
-    }
+    // if (resetData.lastDailyReset || resetData.lastWeeklyReset) {
+    //   axios.post('http://localhost:3001/bot-send', {
+    //       message: '**Your tasks have been reset!**'
+    //   }).catch(() => {});
+    // }
   }
 }
 

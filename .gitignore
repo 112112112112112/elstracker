@@ -48,3 +48,5 @@ reset.json
 challengeData.json
 notepad.txt
 src/js/Home.js
+android/
+ios/

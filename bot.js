@@ -65,7 +65,7 @@ client.on('interactionCreate', async (interaction) => {
         await interaction.reply({ content: 'Checking dailies...', ephemeral: true});
         
         try {
-            const response = await axios.get('http://localhost:3001/dailies-status');
+            // const response = await axios.get('http://localhost:3001/dailies-status');
             const { completed, notCompleted } = response.data;
             
             let reply = '';

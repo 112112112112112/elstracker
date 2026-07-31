@@ -1,6 +1,6 @@
 {
   "name": "elstracker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "main.js",
   "private": true,
   "build": {
@@ -44,15 +44,22 @@
     "dist": "electron-builder"
   },
   "dependencies": {
+    "@capacitor-community/sqlite": "^8.1.0",
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/cli": "^8.4.2",
+    "@capacitor/core": "^8.4.2",
+    "@capacitor/ios": "^8.4.2",
     "axios": "^1.18.1",
-    "better-sqlite3": "^13.0.1",
+    "better-sqlite3": "^13.0.2",
     "bootstrap": "^5.3.8",
     "discord.js": "^14.27.0",
     "dotenv": "^17.4.2",
     "electron-squirrel-startup": "^1.0.1",
     "electron-updater": "^6.8.9",
     "express": "^5.2.1",
+    "install": "^0.13.0",
     "next": "^16.2.10",
+    "npm": "^12.0.2",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.0.0",

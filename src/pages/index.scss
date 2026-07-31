@@ -33,6 +33,20 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     width: 100%;
+
+    &::-webkit-scrollbar {
+        height: .75rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #00000086;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--accent-soft);
+        border-radius: 10px;
+    }
 }
 
 .box {
