@@ -130,7 +130,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <div className="pity-wrapper">
                                             <div className="pity-bar" style={{
                                                 width: `${serp.percent}%`,
-                                                backgroundColor: serp.percent === 100 ? '#4fb667' : '#98e650',
+                                                background: 'linear-gradient(90deg,rgba(190, 230, 80, 1) 0%, rgba(95, 230, 80, 1) 100%)'
                                             }} />
                                             <span className="pity-text">
                                                 {Math.floor(serp.percent)}%
@@ -180,7 +180,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <div className="pity-wrapper">
                                             <div className="pity-bar" style={{
                                                 width: `${doom.percent}%`,
-                                                backgroundColor: doom.percent === 100 ? '#4fb667' : '#6e56f3',
+                                                background: 'linear-gradient(90deg,rgba(110, 86, 243, 1) 0%, rgba(86, 149, 243, 1) 100%)'
                                             }} />
                                             <span className="pity-text">
                                                 {Math.floor(doom.percent)}%

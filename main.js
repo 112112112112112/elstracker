@@ -94,11 +94,11 @@ function tasksReset() {
   if (needsReset) {
     saveReset(resetData);
 
-    // if (resetData.lastDailyReset || resetData.lastWeeklyReset) {
-    //   axios.post('http://localhost:3001/bot-send', {
-    //       message: '**Your tasks have been reset!**'
-    //   }).catch(() => {});
-    // }
+    if (resetData.lastDailyReset || resetData.lastWeeklyReset) {
+      axios.post('http://194.163.140.114:3001/bot-send', {
+          message: '**Your tasks have been reset!**'
+      }).catch(() => {});
+    }
   }
 }
 
@@ -153,6 +153,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 1300,
     height: 800,
+    minWidth: 1100,
     webPreferences: {
       preload: preloadPath,
       contextIsolation: true,

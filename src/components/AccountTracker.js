@@ -19,43 +19,40 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
 
     return (
         <Row className='my-5'>
-            <Col>
+            <Col responsive className="col-notepad">
                 <Notepad />
             </Col>
             {enabledDailies.length > 0 && (
-                <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem'}}>
-                    <table className='text-center box'>
-                        <thead>
-                            <tr>
-                                <th>Dailies</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {enabledDailies.map(task => {
-                                const row = checklist.find(cl => cl.character_id === 0 && cl.task_id === task.id) || {completed: 0, enabled: 1};
-                                return (
-                                    <tr key={task.id}>
-                                        <td>{task.title}</td>
-                                        <td
-                                            onClick={() => toggleTask(0, task.id, row.completed)}
-                                            role='button'
-                                        >
-                                            {row?.completed ? '✅' : '❌'}
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                {/* </Col> */}
-            {/* )} */}
-            {/* {enabledWeeklies.length > 0 && ( */}
-            {/* // <Col> */}
+            <Col responsive style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem'}}>
                 <table className='text-center box'>
                     <thead>
                         <tr>
-                            <th>Weeklies</th>
+                            <th colspan={2}>Dailies</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {enabledDailies.map(task => {
+                            const row = checklist.find(cl => cl.character_id === 0 && cl.task_id === task.id) || {completed: 0, enabled: 1};
+                            return (
+                                <tr key={task.id}>
+                                    <td><img src={`/img/tasks/${task.icon}`} style={{ maxWidth: '80px', maxHeight: '80px'}} /></td>
+                                    <td>{task.title}</td>
+                                    <td
+                                        onClick={() => toggleTask(0, task.id, row.completed)}
+                                        role='button'
+                                    >
+                                        {row?.completed ? '✅' : '❌'}
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <table className='text-center box'>
+                    <thead>
+                        <tr>
+                            <th colspan={2}>Weeklies</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -64,6 +61,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
                             const row = checklist.find(cl => cl.character_id === 0 && cl.task_id === task.id) || {completed: 0, enabled: 1};
                             return (
                                 <tr key={task.id}>
+                                    <td><img src={`/img/tasks/${task.icon}`} style={{ maxWidth: '80px', maxHeight: '80px'}} /></td>
                                     <td>{task.title}</td>
                                     <td
                                         onClick={() => {toggleTask(0, task.id, row.completed)}}

@@ -62,10 +62,10 @@ client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
 
     if (interaction.commandName === 'dailies') {
-        await interaction.reply({ content: 'Checking dailies...', ephemeral: true});
+        await interaction.deferReply({ ephemeral: true});
         
         try {
-            // const response = await axios.get('http://localhost:3001/dailies-status');
+            const response = await axios.get('http://localhost:3001/dailies-status');
             const { completed, notCompleted } = response.data;
             
             let reply = '';

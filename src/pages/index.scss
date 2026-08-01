@@ -138,7 +138,7 @@ input.form-control, select.form-select, button.form-dropdown {
     box-shadow: 0px 0px 4px var(--glow);
     border: solid 2px transparent;
     border-radius: 20px;
-    // background: var(--accent);
+    background: transparent;
     transition: all 0.4s ease-in-out;
 
     &:hover {
@@ -162,15 +162,17 @@ button.btn-outline-light {
     @include btn-yeah();
 }
 
-// button.btn-link {
-//     border: none !important;
-//     text-decoration: none;
-//     transition: 0.3s ease-in-out;
+.dropdown-item {
+    color: #FFFFFF !important;
+    &:hover {
+        color: var(--accent) !important;
+    }
+    transition: 0.3s ease-in-out;
+}
 
-//     &:hover {
-//         background-color: var(--accent);
-//     }
-// }
+.dropdown-item.disabled {
+    color: #FFFFFF80 !important;
+}
 
 button.form-dropdown {
     padding: .375rem .75rem;
@@ -263,6 +265,7 @@ button.form-dropdown {
     background: linear-gradient(93.71deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.23) 100%);
     backdrop-filter: blur(40px);
     border-radius: 12px;
+    border: 1px solid #ffffff40;
     height: 24px;
     position: relative;
     overflow: hidden;
@@ -296,3 +299,13 @@ button.form-dropdown {
 
 
 // ? ----------------------------------------------------------------
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .col-notepad {
+        margin-bottom: 2rem;
+    }
+}
