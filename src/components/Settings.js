@@ -36,7 +36,8 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                 <summary className="h4" style={{ cursor: 'pointer' }}>
                 Delete tasks
                 </summary>
-                    <table className='text-center box'>
+                <span>Only tasks created by you can be deleted.</span>
+                    <table className='text-center box mt-3'>
                         <thead>
                             <tr>
                                 <th>Task</th>
@@ -111,7 +112,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                 <summary className="h4" style={{ cursor: 'pointer' }}>
                 Character settings
                 </summary>
-                <div className="p-3 rounded mt-2 overflow-auto">
+                <div className="p-3 rounded mt-2 scroll-wrapper">
                     <table className='text-center box'>
                         <thead>
                             <tr>

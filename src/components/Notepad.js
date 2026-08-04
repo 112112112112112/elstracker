@@ -21,9 +21,9 @@ export default function Notepad() {
         <Form.Control
             id='notepad'
             as="textarea"
-            rows={10}
+            rows={15}
             value={notes}
-            style={{height: '100%'}}
+            style={{ marginTop: '2rem' }}
             onChange={(e) => {
                 setNotes(e.target.value);
                 saveNotes(e.target.value);

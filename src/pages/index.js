@@ -30,7 +30,7 @@ export default function IndexPage() {
 
     const [pityRefresh, setPityRefresh] = useState(0);
 
-    const [theme, setTheme] = useState('08-LA');
+    const [theme, setTheme] = useState('luciel');
 
     const [viewMode, setViewMode] = useState('both');
 
@@ -247,6 +247,7 @@ export default function IndexPage() {
                     tasks={tasks}
                     checklist={checklist}
                     toggleTask={toggleTask}
+                    theme={theme}
                 />
 
                 <Row className='my-5'>

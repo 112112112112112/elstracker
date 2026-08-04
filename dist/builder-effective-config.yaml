@@ -2,6 +2,7 @@ directories:
   output: dist
   buildResources: build
 appId: com.elstracker.app
+artifactName: ${productName}-Setup-${version}.${ext}
 asarUnpack:
   - '**/*.node'
   - node_modules/better-sqlite3/**

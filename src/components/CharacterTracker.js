@@ -17,17 +17,6 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
     const [editColor, setEditColor] = useState('');
     const [editError, setEditError] = useState('');
 
-    const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsSmallScreen(window.innerWidth < 1400);
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     useEffect(() => {
         console.log('checklist updated:', checklist);
     }, [checklist]);
@@ -58,179 +47,132 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
     return (
         <>
         <div className="scroll-wrapper">
-            {!isSmallScreen ? (
-                // ! DESKTOP
-                <table key={checklist.length} className='text-center box box-character'>
-                    <thead>
-                        <tr>
-                            <th colSpan={2}>Action</th>
-                            <th colSpan={3}>Character</th>
-                            {enabledTasks.map(t => {
-                                let icon = t.icon ? `img/tasks/${t.icon}` : null;
-                                if (t.title === 'Challenge Mode' && currentWeek) {
-                                    icon = currentWeek === 'Rosso' ? '/img/tasks/rosso.webp' : '/img/tasks/berthe.webp';
-                                }
-                                return (
-                                <th key={t.id}>
-                                    {(viewMode === 'both' || viewMode === 'icons') && icon && (
-                                        <img src={icon} style={{ maxWidth: '80px', maxHeight: '80px'}} />
-                                    )}
-                                    {(viewMode === 'both' || viewMode === 'titles') && t.title}
-                                    </th>
-                                )
-                            })}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {characters.map(c => {
-                            const isEditing = editId === c.id;
-
+            <table key={checklist.length} className='text-center box box-character'>
+                <thead>
+                    <tr>
+                        <th colSpan={2}>Action</th>
+                        <th colSpan={3}>Character</th>
+                        {enabledTasks.map(t => {
+                            let icon = t.icon ? `img/tasks/${t.icon}` : null;
+                            if (t.title === 'Challenge Mode' && currentWeek) {
+                                icon = currentWeek === 'Rosso' ? '/img/tasks/rosso.webp' : '/img/tasks/berthe.webp';
+                            }
                             return (
-                                <tr key={c.id} className='character-row' style={{ backgroundColor: `${c.color}33`, outline: `2px solid ${c.color}` }}>
+                            <th key={t.id}>
+                                {(viewMode === 'both' || viewMode === 'icons') && icon && (
+                                    <img src={icon} style={{ maxWidth: '80px', maxHeight: '80px'}} />
+                                )}
+                                {(viewMode === 'both' || viewMode === 'titles') && t.title}
+                                </th>
+                            )
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {characters.map(c => {
+                        const isEditing = editId === c.id;
+
+                        return (
+                            <tr key={c.id} className='character-row' style={{ backgroundColor: `${c.color}33`, outline: `2px solid ${c.color}` }}>
+                                {isEditing ? (
+                                    <>
+                                        <td>
+                                            <Button variant='outline-light' size='sm' onClick={() => saveEdit(c.id)}>💾</Button>
+                                        </td>
+                                        <td>
+                                            <Button variant='outline-light' size='sm' onClick={cancelEdit}>✖️</Button>
+                                        </td>
+                                    </>
+                                ) : (
+                                    <>
+                                        <td>
+                                            <Button variant='outline-light' size='sm' onClick={() => handleDeleteCharacter(c.id)}>🗑️</Button>
+                                        </td>
+                                        <td>
+                                            <Button variant='outline-light' size='sm' onClick={() => editChar(c)}>✏️</Button>
+                                        </td>
+                                    </>
+                                )}
+                                <td>
+                                    {isEditing ? (
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant='outline-secondary' size='sm'>
+                                                <img src={`/img/classes/${editClass || c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '4px', padding: '8px' }}>
+                                                    {classes.map(img => (
+                                                        <Dropdown.Item key={img} onClick={() => setEditClass(img)} style={{ padding: '2px' }}>
+                                                            <img src={`/img/classes/${img}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                                                        </Dropdown.Item>
+                                                    ))}
+                                                </div>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    ) : (
+                                        <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                                    )}
+                                </td>
                                     {isEditing ? (
                                         <>
                                             <td>
-                                                <Button variant='outline-light' size='sm' onClick={() => saveEdit(c.id)}>💾</Button>
+                                            <Form.Control
+                                                autoFocus
+                                                type="text"
+                                                size="sm"
+                                                value={editName}
+                                                minLength={2}
+                                                maxLength={12}
+                                                onChange={(e) => {
+                                                    setEditName(e.target.value);
+                                                    setEditError('');
+                                                }}
+                                                style={{ width: '12rem' }}
+                                                isInvalid={!!editError}
+                                            />
                                             </td>
                                             <td>
-                                                <Button variant='outline-light' size='sm' onClick={cancelEdit}>✖️</Button>
+                                                <Form.Control
+                                                    autoFocus
+                                                    type="color"
+                                                    value={editColor}
+                                                    onChange={(e) => setEditColor(e.target.value)}
+                                                />
                                             </td>
                                         </>
                                     ) : (
                                         <>
-                                            <td>
-                                                <Button variant='outline-light' size='sm' onClick={() => handleDeleteCharacter(c.id)}>🗑️</Button>
-                                            </td>
-                                            <td>
-                                                <Button variant='outline-light' size='sm' onClick={() => editChar(c)}>✏️</Button>
+                                            <td
+                                                colSpan={2}
+                                                style={{ width: '100%', textAlign: "center" }}
+                                            >
+                                                {c.name}
                                             </td>
                                         </>
                                     )}
-                                    <td>
-                                        {isEditing ? (
-                                            <Dropdown>
-                                                <Dropdown.Toggle variant='outline-secondary' size='sm'>
-                                                    <img src={`/img/classes/${editClass || c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                                                </Dropdown.Toggle>
-                                                <Dropdown.Menu>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '4px', padding: '8px' }}>
-                                                        {classes.map(img => (
-                                                            <Dropdown.Item key={img} onClick={() => setEditClass(img)} style={{ padding: '2px' }}>
-                                                                <img src={`/img/classes/${img}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                                                            </Dropdown.Item>
-                                                        ))}
-                                                    </div>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        ) : (
-                                            <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                                        )}
-                                    </td>
-                                        {isEditing ? (
-                                            <>
-                                                <td>
-                                                <Form.Control
-                                                    autoFocus
-                                                    type="text"
-                                                    size="sm"
-                                                    value={editName}
-                                                    minLength={2}
-                                                    maxLength={12}
-                                                    onChange={(e) => {
-                                                        setEditName(e.target.value);
-                                                        setEditError('');
-                                                    }}
-                                                    style={{ width: '12rem' }}
-                                                    isInvalid={!!editError}
-                                                />
-                                                </td>
-                                                <td>
-                                                    <Form.Control
-                                                        autoFocus
-                                                        type="color"
-                                                        value={editColor}
-                                                        onChange={(e) => setEditColor(e.target.value)}
-                                                    />
-                                                </td>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <td
-                                                    colSpan={2}
-                                                    style={{ width: '100%', textAlign: "center" }}
-                                                >
-                                                    {c.name}
-                                                </td>
-                                            </>
-                                        )}
-                                    {enabledTasks.map(task => {
-                                        const row = checklist.find(cl => cl.character_id === c.id && cl.task_id === task.id) || {completed: 0};
-                                        if (row.enabled === 0) {
-                                            return (
-                                                <td key={task.id} className='text-muted cell-disabled'
-                                                >
-                                                    N/A
-                                                </td>
-                                            )
-                                        }
-                                        return <td
-                                            key={task.id}
-                                            onClick={() => toggleTask(c.id, task.id, row.completed)}
-                                            role='button'
-                                        >
-                                            {row?.completed ? '✅' : '❌'}
-                                        </td>
-                                    })}
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            ) : (
-                // ! UNDER 1400px
-                <table className='text-center box box-character'>
-                    <thead>
-                        <tr>
-                            <th>Tasks</th>
-                            {characters.map(c => (
-                                <th key={c.id} style={{ backgroundColor: `${c.color}33` }}>
-                                    <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                                    <div>{c.name}</div>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {enabledTasks.map(task => {
-                            let icon = task.icon ? `img/tasks/${task.icon}` : null;
-                            if (task.title === 'Challenge Mode' && currentWeek) {
-                                icon = currentWeek === 'Rosso' ? '/img/tasks/rosso.webp' : '/img/tasks/berthe.webp';
-                            }
-                            return (
-                                <tr key={task.id}>
-                                    <td style={{ fontWeight: 'bold' }}>
-                                        {(viewMode === 'both' || viewMode === 'icons') && icon && (
-                                            <img src={icon} style={{ maxWidth: '40px', maxHeight: '40px' }} />
-                                        )}
-                                        {(viewMode === 'both' || viewMode === 'titles') && task.title}
-                                    </td>
-                                    {characters.map(c => {
-                                        const row = checklist.find(cl => cl.character_id === c.id && cl.task_id === task.id) || {completed: 0};
-                                        if (row.enabled === 0) {
-                                            return <td key={c.id} className='text-muted cell-disabled'>N/A</td>;
-                                        }
+                                {enabledTasks.map(task => {
+                                    const row = checklist.find(cl => cl.character_id === c.id && cl.task_id === task.id) || {completed: 0};
+                                    if (row.enabled === 0) {
                                         return (
-                                            <td key={c.id} onClick={() => toggleTask(c.id, task.id, row.completed)} role='button'>
-                                                {row?.completed ? '✅' : '❌'}
+                                            <td key={task.id} className='text-muted cell-disabled'
+                                            >
+                                                N/A
                                             </td>
-                                        );
-                                    })}
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            )}
+                                        )
+                                    }
+                                    return <td
+                                        key={task.id}
+                                        onClick={() => toggleTask(c.id, task.id, row.completed)}
+                                        role='button'
+                                    >
+                                        {row?.completed ? '✅' : '❌'}
+                                    </td>
+                                })}
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
         </>
     );

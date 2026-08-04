@@ -154,6 +154,7 @@ const createWindow = () => {
     width: 1300,
     height: 800,
     minWidth: 1100,
+    title: `ElsTracker ${app.getVersion()}`,
     webPreferences: {
       preload: preloadPath,
       contextIsolation: true,

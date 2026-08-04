@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import Notepad from "./Notepad";
 
-export default function AccountTracker({ tasks, checklist, toggleTask }) {
+export default function AccountTracker({ tasks, checklist, toggleTask, theme }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
 
     const dailyTasks = accTasks.filter(t => t.reset === 'daily');
@@ -18,12 +18,18 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
     });
 
     return (
+        <>
         <Row className='my-5'>
-            <Col responsive className="col-notepad">
-                <Notepad />
+            <Col className="col-notepad">
+                <div className="text-center my-3">
+                    <img 
+                        src={`/img/chibi/${theme}-chibi.png`} 
+                        style={{ width: '300px', objectFit: 'contain' }}
+                    />
+                </div>
             </Col>
             {enabledDailies.length > 0 && (
-            <Col responsive style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem'}}>
+            <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem'}}>
                 <table className='text-center box'>
                     <thead>
                         <tr>
@@ -49,6 +55,12 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
                         })}
                     </tbody>
                 </table>
+            </Col>
+            )}
+        </Row>
+        <Row className="my-5">
+        {enabledDailies.length > 0 && (
+            <Col>
                 <table className='text-center box'>
                     <thead>
                         <tr>
@@ -77,5 +89,6 @@ export default function AccountTracker({ tasks, checklist, toggleTask }) {
             </Col>
             )}
         </Row>
+        </>
     )
 }
