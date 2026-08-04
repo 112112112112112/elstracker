@@ -33,7 +33,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                 <table className='text-center box'>
                     <thead>
                         <tr>
-                            <th colspan={2}>Dailies</th>
+                            <th colSpan={2}>Dailies</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                 <table className='text-center box'>
                     <thead>
                         <tr>
-                            <th colspan={2}>Weeklies</th>
+                            <th colSpan={2}>Weeklies</th>
                             <th>Status</th>
                         </tr>
                     </thead>
