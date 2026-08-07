@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import Notepad from "./Notepad";
+import { Check, X } from "react-bootstrap-icons";
 
 export default function AccountTracker({ tasks, checklist, toggleTask, theme }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
@@ -19,8 +20,13 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
 
     return (
         <>
-        <Row className='my-5'>
+        <Row className="my-5">
             <Col className="col-notepad">
+                <Notepad />
+            </Col>
+        </Row>
+        <Row className='my-5'>
+            <Col>
                 <div className="text-center my-3">
                     <img 
                         src={`/img/chibi/${theme}-chibi.png`} 
@@ -48,7 +54,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                                         onClick={() => toggleTask(0, task.id, row.completed)}
                                         role='button'
                                     >
-                                        {row?.completed ? '✅' : '❌'}
+                                        {row?.completed ? <Check /> : <X />}
                                     </td>
                                 </tr>
                             );
@@ -79,7 +85,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                                         onClick={() => {toggleTask(0, task.id, row.completed)}}
                                         role='button'
                                     >
-                                        {row?.completed ? '✅' : '❌'}
+                                        {row?.completed ? <Check /> : <X />}
                                     </td>
                                 </tr>
                             );

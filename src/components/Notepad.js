@@ -21,7 +21,7 @@ export default function Notepad() {
         <Form.Control
             id='notepad'
             as="textarea"
-            rows={15}
+            rows={8}
             value={notes}
             style={{ marginTop: '2rem' }}
             onChange={(e) => {

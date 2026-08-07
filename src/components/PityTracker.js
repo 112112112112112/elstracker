@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Plus, Dash } from "react-bootstrap-icons";
 
 export default function PityTracker({ characters, tasks }) {
     const serpTask = tasks.find(t => t.title === 'Serpentium');
@@ -96,7 +97,7 @@ export default function PityTracker({ characters, tasks }) {
                                             variant="outline-light"
                                             onClick={() => removeRun(c.id, serpTask?.id)}
                                         >
-                                        ➖
+                                        <Dash />
                                         </Button>
                                         <Button
                                             size="sm"
@@ -104,7 +105,7 @@ export default function PityTracker({ characters, tasks }) {
                                             className="mx-2"
                                             onClick={() => addRun(c.id, serpTask?.id)}
                                         >
-                                        ➕
+                                        <Plus />
                                         </Button>
                                         <Form.Control
                                             autoFocus
@@ -146,7 +147,7 @@ export default function PityTracker({ characters, tasks }) {
                                             variant="outline-light"
                                             onClick={() => removeRun(c.id, doomTask?.id)}
                                         >
-                                        ➖
+                                        <Dash />
                                         </Button>
                                         <Button
                                             size="sm"
@@ -154,7 +155,7 @@ export default function PityTracker({ characters, tasks }) {
                                             variant="outline-light"
                                             onClick={() => addRun(c.id, doomTask?.id)}
                                         >
-                                        ➕
+                                        <Plus />
                                         </Button>
                                         <Form.Control
                                             autoFocus

@@ -29,6 +29,36 @@
     }
 }
 
+svg {
+    height: 28px;
+    width: 28px;
+
+    &.bi-pencil, &.bi-trash {
+        height: 22px;
+        width: 22px;
+    }
+    
+    &.bi-x {
+        color: #ff0000;
+        filter: drop-shadow(0 0 8px #ff4444cc);
+        
+        &:hover {
+            transition: 0.3s ease-in-out;
+            filter: drop-shadow(0 0 16px #ff4444cc) drop-shadow(0 0 32px #ff4444cc);
+        }
+    }
+    
+    &.bi-check {
+        color: #00d800;
+        filter: drop-shadow(0 0 8px #70ff44cc);
+        
+        &:hover {
+            transition: 0.3s ease-in-out;
+            filter: drop-shadow(0 0 16px #70ff44cc) drop-shadow(0 0 32px #70ff44cc);
+        }
+    }
+}
+
 .scroll-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -108,6 +138,18 @@ input.form-control, select.form-select, button.form-dropdown {
     option {
         color: #ffffff;
         
+    }
+}
+
+button.dropdown-toggle {
+    background: transparent;
+    border-color: var(--accent);
+    color: white;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        background: transparent;
+        border-color: var(--glow);
     }
 }
 

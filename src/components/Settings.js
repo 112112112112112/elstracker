@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import ThemePicker from "./ThemePicker";
 import { useEffect, useState } from "react";
+import { Check, X } from "react-bootstrap-icons";
 
 export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask, viewMode, setViewMode, theme, setTheme }) {
     const [webhookUrl, setWebhookUrl] = useState('');
@@ -99,7 +100,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                             }}
                                             role='button'
                                         >
-                                            {row.enabled ? '✅' : '❌'}
+                                            {row.enabled ? <Check /> : <X />}
                                         </td>
                                     </tr>
                                 );
@@ -141,7 +142,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                         return (
                                             <td key={task.id}>
                                                 <span onClick={() => toggleTaskEnabled(c.id, task.id, row.enabled)} role='button'>
-                                                    {row.enabled ? '✅' : '❌'}
+                                                    {row.enabled ? <Check /> : <X />}
                                                 </span>
                                             </td>
                                         );

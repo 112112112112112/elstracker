@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Dropdown, Form } from "react-bootstrap";
+import { Check, Floppy, Pencil, Trash, X } from "react-bootstrap-icons";
 
 export default function CharacterTracker({ characters, tasks, checklist, toggleTask, handleDeleteCharacter, handleEditCharacter, classes, validateName, currentWeek, viewMode }) {
     const allTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
@@ -77,19 +78,19 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                 {isEditing ? (
                                     <>
                                         <td>
-                                            <Button variant='outline-light' size='sm' onClick={() => saveEdit(c.id)}>💾</Button>
+                                            <Button variant='outline-light' size='sm' onClick={() => saveEdit(c.id)}><Floppy /></Button>
                                         </td>
                                         <td>
-                                            <Button variant='outline-light' size='sm' onClick={cancelEdit}>✖️</Button>
+                                            <Button variant='outline-light' size='sm' onClick={cancelEdit}><X /></Button>
                                         </td>
                                     </>
                                 ) : (
                                     <>
                                         <td>
-                                            <Button variant='outline-light' size='sm' onClick={() => handleDeleteCharacter(c.id)}>🗑️</Button>
+                                            <Button variant='outline-light' size='sm' onClick={() => handleDeleteCharacter(c.id)}><Trash /></Button>
                                         </td>
                                         <td>
-                                            <Button variant='outline-light' size='sm' onClick={() => editChar(c)}>✏️</Button>
+                                            <Button variant='outline-light' size='sm' onClick={() => editChar(c)}><Pencil /></Button>
                                         </td>
                                     </>
                                 )}
@@ -165,7 +166,7 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
                                         onClick={() => toggleTask(c.id, task.id, row.completed)}
                                         role='button'
                                     >
-                                        {row?.completed ? '✅' : '❌'}
+                                        {row?.completed ? <Check /> : <X />}
                                     </td>
                                 })}
                             </tr>
