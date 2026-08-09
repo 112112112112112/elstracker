@@ -7,6 +7,12 @@
         radial-gradient(circle at 70% 100%, var(--accent) 0%, transparent 60%),
         #1a1a1a;
     background-attachment: fixed;
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+h1, h2, h4 {
+    color: var(--glow) !important;
+    text-shadow: 0 0 10px var(--accent);
 }
 
 #notepad {
@@ -17,8 +23,6 @@
     border: solid 1px var(--accent);
     border-radius: 20px;
     color: #ffffff;
-        color: var(--glow);
-
     display: flex;
     flex-direction: column;
     gap: 1em;

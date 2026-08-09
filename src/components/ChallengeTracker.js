@@ -20,7 +20,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
 
     return (
         <>
-            <h2>Challenge Mode <img src={`/img/tasks/${currentWeek.toLowerCase()}.webp`} alt={currentWeek} /></h2>
+            <h2><img src={`/img/tasks/${currentWeek.toLowerCase()}.webp`} alt={currentWeek} /> Challenge Tracker</h2>
             <table className='text-center box'>
                 <thead>
                     <tr>

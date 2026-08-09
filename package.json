@@ -1,6 +1,6 @@
 {
   "name": "elstracker",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "main": "main.js",
   "private": true,
   "build": {
@@ -10,7 +10,7 @@
       "**/*.node",
       "node_modules/better-sqlite3/**"
     ],
-    "productName": "elstracker",
+    "productName": "ElsTracker",
     "files": [
       "out/**/*",
       "main.js",
@@ -20,6 +20,7 @@
       "node_modules/**/*",
       "public/**/*"
     ],
+    "icon": "build/icon.ico",
     "publish": {
       "provider": "github",
       "owner": "112112112112112",
@@ -27,7 +28,8 @@
       "releaseType": "release"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/icon.ico"
     },
     "npmRebuild": false
   },

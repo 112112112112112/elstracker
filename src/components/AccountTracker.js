@@ -35,7 +35,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                 </div>
             </Col>
             {enabledDailies.length > 0 && (
-            <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem'}}>
+            <Col style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2rem'}}>
                 <table className='text-center box'>
                     <thead>
                         <tr>

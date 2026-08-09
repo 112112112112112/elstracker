@@ -65,7 +65,6 @@ export default function PityTracker({ characters, tasks }) {
    
     return (
         <>
-            <h2>Pity Tracker</h2>
             <table className='text-center box'>
                 <thead>
                     <tr>

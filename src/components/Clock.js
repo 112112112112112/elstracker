@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ClockHistory } from "react-bootstrap-icons";
 
 export default function Clock() {
     const [time, setTime] = useState(new Date());
@@ -19,6 +20,6 @@ export default function Clock() {
     const utcTime = `${hours}:${minutes}:${seconds}`;
 
     return (
-        <h2 className='text-center' suppressHydrationWarning>Server Time: {utcTime}</h2>
+        <h2 className='text-center' suppressHydrationWarning><ClockHistory /> Server Time: {utcTime}</h2>
     );
 }

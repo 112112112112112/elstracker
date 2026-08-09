@@ -9,6 +9,7 @@ import CharacterTracker from '../components/CharacterTracker';
 import Clock from '../components/Clock';
 import PityTracker from '../components/PityTracker';
 import Settings from '../components/Settings';
+import { CardChecklist, Gear, GearFill, ListCheck, ListStars, PatchPlus } from 'react-bootstrap-icons';
 
 export default function IndexPage() {
     const [tasks, setTasks] = useState([]);
@@ -242,7 +243,7 @@ export default function IndexPage() {
             <Container className='mx-auto pt-4 pb-4'>
                 <h1 className='text-center'>ElsTracker</h1>
                 <Clock />
-                <h2>📑 Checklist</h2>
+                <h2><ListCheck /> Checklist</h2>
                 <AccountTracker
                     tasks={tasks}
                     checklist={checklist}
@@ -252,6 +253,7 @@ export default function IndexPage() {
 
                 <Row className='my-5'>
                     <Col>
+                        <h2><CardChecklist /> Character Tracker</h2>
                         <CharacterTracker 
                             characters={characters}
                             tasks={tasks}
@@ -278,6 +280,7 @@ export default function IndexPage() {
                 </Row>
                 <Row className='my-5'>
                     <Col>
+                        <h2><ListStars /> Pity Tracker</h2>
                         <PityTracker
                             characters={characters}
                             tasks={tasks}
@@ -287,7 +290,7 @@ export default function IndexPage() {
                 </Row>
                 <Row className='my-5'>
                     <Col>
-                        <h2>Add a character</h2>
+                        <h2><PatchPlus /> Add a character</h2>
                         <AddCharacterForm 
                             newCharName={newCharName}
                             setNewCharName={setNewCharName}
@@ -305,7 +308,7 @@ export default function IndexPage() {
 
                 <Row className='my-5'>
                     <Col>
-                        <h2>Create a task</h2>
+                        <h2><PatchPlus /> Create a task</h2>
                         <AddTaskForm
                             newIcon={newIcon}
                             setNewIcon={setNewIcon}
@@ -320,7 +323,7 @@ export default function IndexPage() {
                     </Col>
                 </Row>
 
-                <h2>⚙️ Settings</h2>
+                <h2><Gear /> Settings</h2>
                 <Settings
                     checklist={checklist}
                     tasks={tasks}
