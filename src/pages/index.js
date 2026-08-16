@@ -35,7 +35,6 @@ export default function IndexPage() {
 
     const [viewMode, setViewMode] = useState('both');
 
-    const [lastWebhookDate, setLastWebhookDate] = useState(null);
 
     useEffect(() => {
         async function load() {
@@ -172,29 +171,6 @@ export default function IndexPage() {
         setChecklist(checklist => checklist.map(row =>
             row.character_id === characterId && row.task_id === taskId ? {...row, completed: newStatus} : row
         ));
-
-        // todo bot webhook stuff
-        if (characterId === 0) {
-            const dailyTasks = tasks.filter(t => t.bound === 'account' && t.reset === 'daily');
-            const enabledTasks = dailyTasks.filter(task => {
-                const row = checklist.find(cl => cl.character_id === 0 && cl.task_id === task.id);
-                return row?.enabled === 1;
-            });
-            const allCompleted = enabledTasks.every(task => {
-                const row = checklist.find(cl => cl.character_id === 0 && cl.task_id === task.id);
-                return row?.completed === 1;
-            });
-
-            if (dailyTasks.length > 0 && allCompleted) {
-                const today = new Date().toDateString();
-                if (lastWebhookDate !== today) {
-                    await axios.post('http://localhost:3001/bot-send', {
-                        message: 'All daily tasks completed!'
-                    });
-                    setLastWebhookDate(today);
-                }
-            }
-        }
     }
 
     const toggleTaskEnabled = async(characterId, taskId, currentEnabled) => {
@@ -205,22 +181,6 @@ export default function IndexPage() {
             row.character_id === characterId && row.task_id === taskId ? {...row, enabled: newEnabled} : row
         ));
     }
-
-    // todo
-    const sendWebhook = async (message) => {
-        const webhookUrl = localStorage.getItem('webhookUrl');
-        if (!webhookUrl) return;
-
-        try {
-            await fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: message })
-            });
-        } catch (error) {
-            console.error('Webhook failed:', error);
-        }
-    };
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');

@@ -95,9 +95,11 @@ function tasksReset() {
     saveReset(resetData);
 
     if (resetData.lastDailyReset || resetData.lastWeeklyReset) {
-      axios.post('http://194.163.140.114:3001/bot-send', {
-          message: '**Your tasks have been reset!**'
-      }).catch(() => {});
+      new Notification({
+        title: 'ElsTracker',
+        body: 'Your tasks have been reset!',
+        icon: path.join(__dirname, 'build', 'icon.png')
+      }).show();
     }
   }
 }
@@ -484,17 +486,6 @@ ipcMain.handle('delete-task', (event, taskId) => {
     db.prepare('DELETE FROM checklist WHERE task_id = ?').run(taskId);
     db.prepare('DELETE FROM tasks WHERE id = ?').run(taskId);
     return true;
-});
-
-// * Webhook ----------------------------------------------------------------------------------*
-
-ipcMain.handle('send-discord-msg', async (event, message) => {
-    try {
-        console.log('Daily completion notification (disabled):', message);
-        return { success: true };
-    } catch (error) {
-        return {success: false, error: error.message};
-    }
 });
 
 // * ----------------------------------------------------------------------------------*

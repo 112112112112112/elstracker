@@ -20,14 +20,14 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
 
     return (
         <>
-            <h2><img src={`/img/tasks/${currentWeek.toLowerCase()}.webp`} alt={currentWeek} /> Challenge Tracker</h2>
+            <h2><img src={`/img/tasks/${currentWeek.toLowerCase()}.webp`} alt={currentWeek} width="60px"/> Challenge Tracker</h2>
             <table className='text-center box'>
                 <thead>
                     <tr>
                         <th colSpan={2}>Character</th>
                         <th><img src={`img/items/${currentWeek.toLowerCase()}-aura.webp`} alt={`${currentWeek} Aura`} /></th>
                         <th><img src={`img/items/${currentWeek.toLowerCase()}-reset.webp`} alt={`${currentWeek} Reset Tickets`} /></th>
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -139,7 +139,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                                 type="number"
                                                 size="sm"
                                                 className="mx-2"
-                                                placeholder="Set aura amount"
+                                                placeholder="Set aura to..."
                                                 style={{ width: '9rem' }}
                                                 onKeyDown={async (e) => {
                                                     if (e.key === 'Enter') {

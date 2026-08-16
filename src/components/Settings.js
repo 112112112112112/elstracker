@@ -4,31 +4,11 @@ import { useEffect, useState } from "react";
 import { Check, X } from "react-bootstrap-icons";
 
 export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask, viewMode, setViewMode, theme, setTheme }) {
-    const [webhookUrl, setWebhookUrl] = useState('');
-
-    useEffect(() => {
-        const saved = localStorage.getItem('webhookUrl');
-        if (saved) setWebhookUrl(saved);
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('webhookUrl', webhookUrl);
-    }, [webhookUrl]);
-
     const accTasks = tasks.filter(t => t.bound === 'account');
     const charTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
 
     return (
         <details className="mt-4">
-            <Form.Group>
-                <Form.Label>Discord Webhook URL</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="https://discord.com/api/webhooks/..."
-                    value={webhookUrl}
-                    onChange={(e) => setWebhookUrl(e.target.value)}
-                />
-            </Form.Group>
             <summary className="h4" style={{ cursor: 'pointer' }}>
                 Enable, disable and delete tasks
             </summary>
@@ -41,7 +21,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                     <table className='text-center box mt-3'>
                         <thead>
                             <tr>
-                                <th>Task</th>
+                                <th colSpan={2}>Task</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -53,6 +33,8 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                             {task.icon && (
                                                 <img src={`/img/tasks/${task.icon}`} style={{ maxWidth: '80px', maxHeight: '80px'}} />
                                             )}
+                                        </td>
+                                        <td>
                                             {task.title}
                                         </td>
                                         <td>
@@ -79,7 +61,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                     <table className='text-center box'>
                         <thead>
                             <tr>
-                                <th>Task</th>
+                                <th colSpan={2}>Task</th>
                                 <th>Enabled</th>
                             </tr>
                         </thead>
@@ -92,6 +74,8 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                             {task.icon && (
                                                 <img src={`/img/tasks/${task.icon}`} style={{ maxWidth: '80px', maxHeight: '80px'}} />
                                             )}
+                                        </td>
+                                        <td>
                                             {task.title}
                                         </td>
                                         <td

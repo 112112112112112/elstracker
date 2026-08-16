@@ -8,7 +8,6 @@ const path = require('path');
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CHANNEL_ID = process.env.CHANNEL_ID;
-const WEBHOOK_URL = process.env.WEBHOOK_URL;
 const appData = process.env.APPDATA
 const dbPath = path.join(appData, 'elstracker', 'elstracker.db');
 const db = require('better-sqlite3')(dbPath);
@@ -93,7 +92,6 @@ client.on('interactionCreate', async (interaction) => {
 const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`Webhook URL: ${WEBHOOK_URL}`);
 });
 
 const commands = [

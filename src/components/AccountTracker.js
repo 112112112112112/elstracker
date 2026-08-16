@@ -30,7 +30,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                 <div className="text-center my-3">
                     <img 
                         src={`/img/chibi/${theme}-chibi.png`} 
-                        style={{ width: '300px', objectFit: 'contain' }}
+                        style={{ width: '250px', objectFit: 'contain' }}
                     />
                 </div>
             </Col>
@@ -39,7 +39,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                 <table className='text-center box'>
                     <thead>
                         <tr>
-                            <th colSpan={2}>Dailies</th>
+                            <th colSpan={2}>Daily</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -70,7 +70,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
                 <table className='text-center box'>
                     <thead>
                         <tr>
-                            <th colSpan={2}>Weeklies</th>
+                            <th colSpan={2}>Weekly</th>
                             <th>Status</th>
                         </tr>
                     </thead>

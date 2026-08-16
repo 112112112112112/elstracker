@@ -48,11 +48,10 @@ export default function CharacterTracker({ characters, tasks, checklist, toggleT
     return (
         <>
         <div className="scroll-wrapper">
-            <table key={checklist.length} className='text-center box box-character'>
+            <table key={checklist.length} className='text-center box box-character mb-3'>
                 <thead>
                     <tr>
-                        <th colSpan={2}>Action</th>
-                        <th colSpan={3}>Character</th>
+                        <th colSpan={5}>Character</th>
                         {enabledTasks.map(t => {
                             let icon = t.icon ? `img/tasks/${t.icon}` : null;
                             if (t.title === 'Challenge Mode' && currentWeek) {

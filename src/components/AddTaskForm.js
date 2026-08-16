@@ -5,15 +5,6 @@ export default function AddTaskForm({
 }) {
     return (
         <table className='text-center box'>
-            <thead>
-                <tr>
-                    <th colSpan={2}>Icon</th>
-                    <th>Title</th>
-                    <th>Reset</th>
-                    <th>Bound</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
                     <td className='text-center align-middle'>

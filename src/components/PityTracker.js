@@ -69,10 +69,8 @@ export default function PityTracker({ characters, tasks }) {
                 <thead>
                     <tr>
                         <th colSpan={2}>Character</th>
-                        <th>Serpentium Actions</th>
-                        <th>Serpentium %</th>
-                        <th>Doom Actions</th>
-                        <th>Doom %</th>
+                        <th colSpan={2}>Serpentium</th>
+                        <th colSpan={2}>Doom</th>
                     </tr>
                 </thead>
                 <tbody>

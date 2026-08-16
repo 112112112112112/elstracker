@@ -6,14 +6,6 @@ export default function AddCharacterForm({
 
     return (
         <table className='text-center box'>
-            <thead>
-                <tr>
-                    <th>Class</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>awawawa</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
                     <td className='text-center align-middle'>
