@@ -79,7 +79,6 @@ export default function IndexPage() {
         }
         
         if (!newCharClass) {
-            alert('You need to select a class to create a character!');
             return;
         }
         
@@ -118,7 +117,6 @@ export default function IndexPage() {
 
     const handleAddTask = async() => {
         if (!newTitle.trim()) {
-            alert('Title cannot be empty');
             return;
         }
 

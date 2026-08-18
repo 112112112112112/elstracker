@@ -19,7 +19,20 @@ export default function Clock() {
 
     const utcTime = `${hours}:${minutes}:${seconds}`;
 
+    const now = time.getTime();
+    const reset = new Date(time);
+    reset.setUTCHours(0, 0, 0, 0);
+    reset.setUTCDate(reset.getUTCDate() + 1);
+    const diff = reset - now;
+
+    const hoursLeft = String(Math.floor(diff / 3600000)).padStart(2, '0');
+    const minsLeft = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    const secLeft = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+
     return (
-        <h2 className='text-center' suppressHydrationWarning><ClockHistory /> Server Time: {utcTime}</h2>
+        <>
+            <h2 className='text-center' suppressHydrationWarning><ClockHistory /> Server Time: <span className="clock-digits">{utcTime}</span><br /></h2>
+            <h2 className='text-center' suppressHydrationWarning><ClockHistory /> Reset is in <span className="clock-digits">{hoursLeft}h {minsLeft}min {secLeft}s</span></h2>
+        </>
     );
 }

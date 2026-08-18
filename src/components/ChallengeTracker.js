@@ -73,11 +73,9 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                             variant="outline-light"
                                             disabled={aura < 90}
                                             onClick={async () => {
-                                                if (confirm('Are you sure you want to exchange 90 Aura for CM Suit?')) {
-                                                    await window.db.setAura(c.id, currentWeek, aura -90);
-                                                    const data = await window.db.getChallengeData();
-                                                    setChallengeData(data);
-                                                }
+                                                await window.db.setAura(c.id, currentWeek, aura -90);
+                                                const data = await window.db.getChallengeData();
+                                                setChallengeData(data);
                                             }}
                                         >
                                             Exchange Suit (-90 Aura)
@@ -88,11 +86,9 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                             variant="outline-light"
                                             disabled = {aura < 240}
                                             onClick={async () => {
-                                                if (confirm('Are you sure you want to exchange 240 Aura for CM Force?')) {
-                                                    await window.db.setAura(c.id, currentWeek, aura -240);
-                                                    const data = await window.db.getChallengeData();
-                                                    setChallengeData(data);
-                                                }
+                                                await window.db.setAura(c.id, currentWeek, aura -240);
+                                                const data = await window.db.getChallengeData();
+                                                setChallengeData(data);
                                             }}
                                         >
                                             Exchange Force (-240 Aura)
@@ -102,11 +98,9 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                             className="mx-2"
                                             variant="outline-light"
                                             onClick={async () => {
-                                                if (confirm('Are you sure you want to reset your Aura amount to 0?')) {
-                                                    await window.db.resetAura(c.id, currentWeek);
-                                                    const data = await window.db.getChallengeData();
-                                                    setChallengeData(data);
-                                                }
+                                                await window.db.resetAura(c.id, currentWeek);
+                                                const data = await window.db.getChallengeData();
+                                                setChallengeData(data);
                                             }}
                                         >
                                             Reset Aura
@@ -118,14 +112,12 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
                                                 variant="outline-light"
                                                 disabled={data.resetTicketUsed >= 2}
                                                 onClick={async () => {
-                                                    if (confirm('Are you sure you want to use a Reset Ticket?')) {
-                                                        await window.db.useResetTicket(c.id);
-                                                        const data = await window.db.getChallengeData();
-                                                        setChallengeData(data);
+                                                    await window.db.useResetTicket(c.id);
+                                                    const data = await window.db.getChallengeData();
+                                                    setChallengeData(data);
 
-                                                        const updatedChecklist = await window.db.getChecklist();
-                                                        setChecklist(updatedChecklist);
-                                                    }
+                                                    const updatedChecklist = await window.db.getChecklist();
+                                                    setChecklist(updatedChecklist);
                                                 }}
                                             >
                                                 Reset Ticket ({data.resetTicketUsed}/2)

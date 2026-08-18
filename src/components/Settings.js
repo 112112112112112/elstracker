@@ -47,7 +47,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                             </Button>
                                         </td>
                                     </tr>
-                                );
+                                )
                             })}
                         </tbody>
                     </table>
@@ -87,7 +87,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                             {row.enabled ? <Check /> : <X />}
                                         </td>
                                     </tr>
-                                );
+                                )
                             })}
                         </tbody>
                     </table>
@@ -129,7 +129,7 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                                                     {row.enabled ? <Check /> : <X />}
                                                 </span>
                                             </td>
-                                        );
+                                        )
                                     })}
                                 </tr>
                             ))}
@@ -160,5 +160,5 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
                 </div>
             </details>
         </details>
-    );
+    )
 }
