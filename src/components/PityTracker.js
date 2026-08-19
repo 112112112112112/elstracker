@@ -105,7 +105,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <Plus />
                                         </Button>
                                         <Form.Control
-                                            autoFocus
+                                            // autoFocus
                                             type="number"
                                             size="sm"
                                             className="mx-2"
@@ -155,7 +155,7 @@ export default function PityTracker({ characters, tasks }) {
                                         <Plus />
                                         </Button>
                                         <Form.Control
-                                            autoFocus
+                                            // autoFocus
                                             type="number"
                                             size="sm"
                                             className="mx-2"

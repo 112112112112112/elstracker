@@ -127,7 +127,7 @@ export default function ChallengeTracker({characters, checklist, setChecklist, t
 
                                         <div className="d-flex align-items-center">
                                             <Form.Control
-                                                autoFocus
+                                                // autoFocus
                                                 type="number"
                                                 size="sm"
                                                 className="mx-2"

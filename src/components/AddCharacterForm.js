@@ -69,7 +69,7 @@ export default function AddCharacterForm({
                     <td className='text-center align-middle'>
                         <div className='d-flex flex-column align-items-center'>
                             <Form.Control
-                                autoFocus
+                                // autoFocus
                                 type="text"
                                 placeholder={error || 'Character name'}
                                 minLength={2}

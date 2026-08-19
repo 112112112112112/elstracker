@@ -1,17 +1,144 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Dropdown, Form } from "react-bootstrap";
 import ThemePicker from "./ThemePicker";
 import { useEffect, useState } from "react";
-import { Check, X } from "react-bootstrap-icons";
+import { Check, X, Floppy, Trash } from "react-bootstrap-icons";
 
-export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask, viewMode, setViewMode, theme, setTheme }) {
+export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask, viewMode, setViewMode, theme, setTheme, validateName,
+    handleEditCharacter, classes, handleDeleteCharacter, setCharacters }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
     const charTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
+
+    const [editId, setEditId] = useState(null);
+    const [editName, setEditName] = useState('');
+    const [editClass, setEditClass] = useState('');
+    const [editColor, setEditColor] = useState('');
+    const [editError, setEditError] = useState('');
+
+    const editChar = (c) => {
+        setEditId(c.id);
+        setEditName(c.name);
+        setEditClass(c.class);
+        setEditColor(c.color);
+    }
+    
+    const cancelEdit = () => {
+        setEditId(null);
+    }
+    
+    const saveEdit = async () => {
+        const errorMsg = validateName(editName);
+        if (errorMsg) {
+            setEditError(errorMsg);
+            return;
+        }
+
+        setEditError('');
+        await handleEditCharacter(editId, editName, editClass, editColor);
+        setEditId(null);
+    }
+
 
     return (
         <details className="mt-4">
             <summary className="h4" style={{ cursor: 'pointer' }}>
                 Enable, disable and delete tasks
             </summary>
+
+            <details className="p-3 rounded mt-2">
+                <summary className="h4" style={{ cursor: 'pointer' }}>
+                    Edit character
+                </summary>
+                <table className='text-center box'>
+                    <thead>
+                        <tr>
+                            <th>Character</th>
+                            <th>Class</th>
+                            <th>Color</th>
+                            <th colSpan={2}>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {characters.map(c => (
+                            <tr key={c.id}>
+                                <td>
+                                    <Form.Control
+                                        type="text"
+                                        value={c.name}
+                                        onChange={(e) => {
+                                            const updated = characters.map(char =>
+                                                char.id === c.id ? { ...char, name: e.target.value } : char
+                                            );
+                                            setCharacters(updated);
+                                        }}
+                                    />
+                                </td>
+                                <td>
+                                    <Dropdown drop='up'>
+                                        <Dropdown.Toggle variant='outline-secondary' size='sm' className="form-dropdown">
+                                            <img src={`/img/classes/${c.class}.png`} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu renderOnMount popperConfig={{ strategy: 'fixed' }}>
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)' }}>
+                                                {classes.map(img => {
+                                                    const className = img.replace(/^\d+[-_]/, '');
+                                                    const defaultColors = [
+                                                        '#DB2F2F', '#9400D3', '#41D941', '#333333', '#FF93AE',
+                                                        '#99CCFF', '#EF8D2D', '#9B111E', '#9F81F7', '#1953B4',
+                                                        '#E9C92C', '#19D2A8', '#DB4183', '#414482', '#3AA370'
+                                                    ];
+                                                    return (
+                                                        <Dropdown.Item
+                                                            key={img}
+                                                            onClick={() => {
+                                                                const index = classes.indexOf(img);
+                                                                const groupIndex = Math.floor(index / 4) % defaultColors.length;
+                                                                const updated = characters.map(char =>
+                                                                    char.id === c.id ? { 
+                                                                        ...char, 
+                                                                        class: img,
+                                                                        color: defaultColors[groupIndex] 
+                                                                    } : char
+                                                                );
+                                                                setCharacters(updated);
+                                                            }}
+                                                        >
+                                                            <img src={`/img/classes/${img}.png`} alt={className} style={{ width: '63px', height: '63px', objectFit: 'contain' }} />
+                                                        </Dropdown.Item>
+                                                    );
+                                                })}
+                                            </div>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </td>
+                                <td>
+                                    <Form.Control
+                                        type="color"
+                                        value={c.color}
+                                        onChange={(e) => {
+                                            const updated = characters.map(char =>
+                                                char.id === c.id ? { ...char, color: e.target.value } : char
+                                            );
+                                            setCharacters(updated);
+                                        }}
+                                    />
+                                </td>
+                                <td className="d-flex justify-content-evenly">
+                                    <Button variant='outline-light' size='sm' onClick={() => {
+                                        handleEditCharacter(c.id, c.name, c.class, c.color);
+                                    }}>
+                                        <Floppy />
+                                    </Button>
+                                    <Button variant='outline-light' size='sm' onClick={() => {
+                                        handleDeleteCharacter(c.id);
+                                    }}>
+                                        <Trash />
+                                    </Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </details>
 
             <details className="p-3 rounded mt-2">
                 <summary className="h4" style={{ cursor: 'pointer' }}>

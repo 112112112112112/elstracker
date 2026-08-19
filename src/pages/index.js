@@ -292,6 +292,11 @@ export default function IndexPage() {
                     setViewMode={setViewMode}
                     theme={theme}
                     setTheme={setTheme}
+                    validateName={validateName}
+                    handleEditCharacter={handleEditCharacter}
+                    classes={classes}
+                    handleDeleteCharacter={handleDeleteCharacter}
+                    setCharacters={setCharacters}
                 />
             </Container>
         </div>

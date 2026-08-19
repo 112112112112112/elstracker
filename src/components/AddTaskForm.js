@@ -9,7 +9,7 @@ export default function AddTaskForm({
                 <tr>
                     <td className='text-center align-middle'>
                         <Form.Control
-                            autoFocus
+                            // autoFocus
                             type="text"
                             placeholder={'Icon filename'}
                             value={newIcon}
@@ -34,7 +34,7 @@ export default function AddTaskForm({
                     <td className='text-center align-middle'>
                         <div className='d-flex flex-column align-items-center'>
                             <Form.Control
-                                autoFocus
+                                // autoFocus
                                 type="text"
                                 placeholder={'Task title'}
                                 minLength={1}
@@ -47,7 +47,7 @@ export default function AddTaskForm({
                     <td className='text-center align-middle'>
                         <div className='d-flex justify-content-center'>
                             <Form.Select
-                                autoFocus
+                                // autoFocus
                                 value={newReset}
                                 onChange={(e) => setNewReset(e.target.value)}
                             >
@@ -59,7 +59,7 @@ export default function AddTaskForm({
                     <td className='text-center align-middle'>
                         <div className='d-flex justify-content-center'>
                             <Form.Select
-                                autoFocus
+                                // autoFocus
                                 value={newBound}
                                 onChange={(e) => setNewBound(e.target.value)}
                             >
