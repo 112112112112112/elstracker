@@ -9,8 +9,8 @@ export default function Settings({ tasks, checklist, characters, toggleTaskEnabl
     const charTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
 
     return (
-        <details className="mt-4 h2">
-            <summary className="h4" style={{ cursor: 'pointer' }}>
+        <details className="mt-4">
+            <summary className="h2" style={{ cursor: 'pointer' }}>
                 <Gear /> Settings
             </summary>
 
