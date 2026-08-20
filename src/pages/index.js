@@ -280,8 +280,6 @@ export default function IndexPage() {
                         />
                     </Col>
                 </Row>
-
-                <h2><Gear /> Settings</h2>
                 <Settings
                     checklist={checklist}
                     tasks={tasks}

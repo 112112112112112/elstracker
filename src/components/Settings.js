@@ -1,47 +1,17 @@
 import { Button, Dropdown, Form } from "react-bootstrap";
 import ThemePicker from "./ThemePicker";
 import { useEffect, useState } from "react";
-import { Check, X, Floppy, Trash } from "react-bootstrap-icons";
+import { Check, X, Floppy, Trash, Gear } from "react-bootstrap-icons";
 
 export default function Settings({ tasks, checklist, characters, toggleTaskEnabled, handleDeleteTask, viewMode, setViewMode, theme, setTheme, validateName,
     handleEditCharacter, classes, handleDeleteCharacter, setCharacters }) {
     const accTasks = tasks.filter(t => t.bound === 'account');
     const charTasks = tasks.filter(t => t.bound === 'character' && t.title !== 'Challenge Mode');
 
-    const [editId, setEditId] = useState(null);
-    const [editName, setEditName] = useState('');
-    const [editClass, setEditClass] = useState('');
-    const [editColor, setEditColor] = useState('');
-    const [editError, setEditError] = useState('');
-
-    const editChar = (c) => {
-        setEditId(c.id);
-        setEditName(c.name);
-        setEditClass(c.class);
-        setEditColor(c.color);
-    }
-    
-    const cancelEdit = () => {
-        setEditId(null);
-    }
-    
-    const saveEdit = async () => {
-        const errorMsg = validateName(editName);
-        if (errorMsg) {
-            setEditError(errorMsg);
-            return;
-        }
-
-        setEditError('');
-        await handleEditCharacter(editId, editName, editClass, editColor);
-        setEditId(null);
-    }
-
-
     return (
-        <details className="mt-4">
+        <details className="mt-4 h2">
             <summary className="h4" style={{ cursor: 'pointer' }}>
-                Enable, disable and delete tasks
+                <Gear /> Settings
             </summary>
 
             <details className="p-3 rounded mt-2">
