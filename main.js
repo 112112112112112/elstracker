@@ -104,6 +104,25 @@ function tasksReset() {
   }
 }
 
+// * Fragment Tracker  -------------------------------------------------------------------*
+
+const fragmentPath = app.isPackaged 
+    ? path.join(app.getPath('userData'), 'fragmentData.json') 
+    : path.join(__dirname, 'fragmentData.json');
+
+function getFragmentData() {
+    try {
+        const data = fs.readFileSync(fragmentPath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        return { characters: {} };
+    }
+}
+
+function saveFragmentData(data) {
+    fs.writeFileSync(fragmentPath, JSON.stringify(data, null, 2));
+}
+
 // * Challenge Aura Calculator -------------------------------------------------------------------*
 
 const challengePath = app.isPackaged ? path.join(app.getPath('userData'), 'challengeData.json') : path.join(__dirname, 'challengeData.json');
@@ -486,6 +505,49 @@ ipcMain.handle('delete-task', (event, taskId) => {
     db.prepare('DELETE FROM checklist WHERE task_id = ?').run(taskId);
     db.prepare('DELETE FROM tasks WHERE id = ?').run(taskId);
     return true;
+});
+
+ipcMain.handle('update-fragments', (event, characterId, fragmentType, amount) => {
+    const data = getFragmentData();
+    if (!data.characters[characterId]) {
+        data.characters[characterId] = { atma: 0, henir: 0 };
+    }
+    const key = fragmentType === 'atma' ? 'atma' : 'henir';
+    data.characters[characterId][key] = Math.max(0, (data.characters[characterId][key] || 0) + amount);
+    saveFragmentData(data);
+    return data.characters[characterId];
+});
+
+ipcMain.handle('set-fragments', (event, characterId, fragmentType, amount) => {
+    const data = getFragmentData();
+    if (!data.characters[characterId]) {
+        data.characters[characterId] = { atma: 0, henir: 0 };
+    }
+    const key = fragmentType === 'atma' ? 'atma' : 'henir';
+    data.characters[characterId][key] = Math.max(0, amount);
+    saveFragmentData(data);
+    return data.characters[characterId];
+});
+
+ipcMain.handle('reset-fragments', (event, characterId, fragmentType) => {
+    const data = getFragmentData();
+    if (!data.characters[characterId]) {
+        data.characters[characterId] = { atma: 0, henir: 0 };
+    }
+    const key = fragmentType === 'atma' ? 'atma' : 'henir';
+    data.characters[characterId][key] = 0;
+    saveFragmentData(data);
+    return data.characters[characterId];
+});
+
+ipcMain.handle('get-fragments', (event, characterId, fragmentType) => {
+    const data = getFragmentData();
+    const charData = data.characters[characterId] || { atma: 0, henir: 0 };
+    return fragmentType === 'atma' ? charData.atma : charData.henir;
+});
+
+ipcMain.handle('get-all-fragments', () => {
+    return getFragmentData();
 });
 
 // * ----------------------------------------------------------------------------------*

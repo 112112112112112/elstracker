@@ -5,11 +5,12 @@ import AccountTracker from '../components/AccountTracker';
 import AddCharacterForm from '../components/AddCharacterForm';
 import AddTaskForm from '../components/AddTaskForm';
 import ChallengeTracker from '../components/ChallengeTracker';
-import CharacterTracker from '../components/CharacterTracker';
 import Clock from '../components/Clock';
+import FragmentTracker from '../components/FragmentTracker';
 import PityTracker from '../components/PityTracker';
 import Settings from '../components/Settings';
 import { CardChecklist, Gear, GearFill, ListCheck, ListStars, PatchPlus } from 'react-bootstrap-icons';
+import CharacterTracker from '@/components/CharacterTracker';
 
 export default function IndexPage() {
     const [tasks, setTasks] = useState([]);
@@ -233,6 +234,13 @@ export default function IndexPage() {
                             checklist={checklist}
                             setChecklist={setChecklist}
                             tasks={tasks}
+                        />
+                    </Col>
+                </Row>
+                <Row className='my-5'>
+                    <Col>
+                        <FragmentTracker
+                            characters={characters}
                         />
                     </Col>
                 </Row>

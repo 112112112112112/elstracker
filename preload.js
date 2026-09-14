@@ -52,6 +52,21 @@ contextBridge.exposeInMainWorld('db', {
     deleteTask: (taskId) =>
         ipcRenderer.invoke('delete-task', taskId),
 
+    updateFragments: (characterId, fragmentType, amount) =>
+        ipcRenderer.invoke('update-fragments', characterId, fragmentType, amount),
+
+    setFragments: (characterId, fragmentType, amount) =>
+        ipcRenderer.invoke('set-fragments', characterId, fragmentType, amount),
+
+    resetFragments: (characterId, fragmentType) =>
+        ipcRenderer.invoke('reset-fragments', characterId, fragmentType),
+
+    getFragments: (characterId, fragmentType) =>
+        ipcRenderer.invoke('get-fragments', characterId, fragmentType),
+
+    getAllFragments: () =>
+        ipcRenderer.invoke('get-all-fragments'),
+
     sendDiscordMsg: (message) =>
         ipcRenderer.invoke('send-discord-msg', message),
 })
