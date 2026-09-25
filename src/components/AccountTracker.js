@@ -65,7 +65,7 @@ export default function AccountTracker({ tasks, checklist, toggleTask, theme }) 
             )}
         </Row>
         <Row className="my-5">
-        {enabledDailies.length > 0 && (
+        {enabledWeeklies.length > 0 && (
             <Col>
                 <table className='text-center box'>
                     <thead>
