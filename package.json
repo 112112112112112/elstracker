@@ -1,6 +1,6 @@
 {
   "name": "elstracker",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "main": "main.js",
   "private": true,
   "build": {
